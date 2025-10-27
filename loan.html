@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loan Calculator - Property Calculator Hub</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--card:#ffffff;--brand:#2563eb;--brand-700:#1d4ed8;--accent:#f59e0b;--chip:#f3f4f6;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    a{color:var(--brand);text-decoration:none}a:hover{color:var(--brand-700);text-decoration:underline}
+    .top-nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50}
+    .top-nav .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700;color:#111827}.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+    .menu{display:flex;gap:18px;flex-wrap:wrap}.menu a{color:#111827;font-weight:600;padding:6px 8px;border-radius:6px}.menu a.active{color:var(--brand)}
+    .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}.hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}.hero p{margin:0;color:var(--muted)}
+    .grid{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+    @media(max-width:960px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:18px}
+    .card h2{margin:0 0 12px;font-size:18px;color:#111827}.card .sub{color:var(--muted);font-size:13px;margin-top:-6px;margin-bottom:10px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.row{grid-template-columns:1fr}}
+    label{font-size:13px;color:#374151;font-weight:600;display:block;margin:10px 0 6px}
+    input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#111827}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:960px){.kpis{grid-template-columns:1fr 1fr}}
+    .kpi{background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:12px}
+    .kpi .label{font-size:12px;color:var(--muted)}.kpi .value{font-size:18px;font-weight:700;color:#111827}
+    .note{font-size:12px;color:var(--muted);margin-top:8px}
+    [class*="container" i]{max-width:unset}
+  </style>
 </head>
 <body>
-  <nav class="top-navigation">
-    <div class="nav-content">
-      <div class="nav-logo">
-        Property Calculator Hub
+  <nav class="top-nav">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> Property Calculator Hub</div>
+      <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="mortgage.html">Mortgage</a>
+        <a href="loan.html" class="active">Loan</a>
+        <a href="downpayment.html">Down Payment</a>
+        <a href="blog.html">Blog</a>
       </div>
-      <ul class="nav-menu">
-        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
-        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
-        <li><a class="nav-link active" href="loan.html">Loan Calculator</a></li>
-        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
-        <li><a class="nav-link" href="blog.html">📝 Blog</a></li>
-      </ul>
     </div>
   </nav>
-  <div class="container">
-    <div class="hero-section">
-      <h1>💳 Loan Calculator</h1>
-      <p class="hero-description">Calculate loan payments for personal loans, student loans, and more</p>
-    </div>
-    <div class="calculator-container">
-      <div class="card">
-        <h2>📝 Loan Details</h2>
-        <form id="loanForm">
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <label for="loanAmount">Loan Amount</label>
-                <div class="field">
-                  <input type="number" id="loanAmount" value="10000" min="0">
-                  <span class="suffix">$</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="loanTerm">Loan Term (Years)</label>
-                <div class="field">
-                  <input type="number" id="loanTerm" value="5" min="1" max="50">
-                  <span class="suffix">yrs</span>
-                </div>
-              </div>
-            </div>
+
+  <header class="hero">
+    <h1>Loan Calculator</h1>
+    <p>Estimate monthly payments for personal, auto, and student loans.</p>
+  </header>
+
+  <main class="grid">
+    <section class="card" aria-labelledby="inputs">
+      <h2 id="inputs">Loan Details</h2>
+      <div class="sub">Enter your loan amount, APR, and term.</div>
+      <form id="loanForm">
+        <div class="row">
+          <div>
+            <label for="amount">Loan amount</label>
+            <input type="number" id="amount" value="25000" min="0" />
           </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <label for="interestRate">Interest Rate</label>
-                <div class="field">
-                  <input type="number" id="interestRate" value="5.0" min="0" step="0.1">
-                  <span class="suffix">%</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="paymentFrequency">Payment Frequency</label>
-                <select id="paymentFrequency" class="field">
-                  <option value="12">Monthly</option>
-                  <option value="26">Bi-weekly</option>
-                  <option value="52">Weekly</option>
-                </select>
-              </div>
-            </div>
+          <div>
+            <label for="apr">Interest rate (APR %)</label>
+            <input type="number" id="apr" value="8.5" step="0.01" min="0" />
           </div>
-          <div class="actions">
-            <button type="button" class="btn btn-primary" onclick="calculate()">💰 Calculate</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
-          </div>
-        </form>
-      </div>
-      <div class="card">
-        <h2>📊 Payment Breakdown</h2>
-        <div class="results">
-          <div class="result-item">
-            <span class="result-label">Payment Amount</span>
-            <span class="result-value" id="paymentAmount">$0</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Total Payments</span>
-            <span class="result-value" id="totalPayments">$0</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Total Interest</span>
-            <span class="result-value" id="totalInterest">$0</span>
-          </div>
-          <div class="result-item total">
-            <span class="result-label">Total Cost</span>
-            <span class="result-value" id="totalCost">$0</span>
+          <div>
+            <label for="months">Term (months)</label>
+            <input type="number" id="months" value="60" min="1" />
           </div>
         </div>
-        <p class="disclaimer">*Estimates only. Consult a lender for accurate figures.</p>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="results">
+      <h2 id="results">Results</h2>
+      <div class="kpis">
+        <div class="kpi"><div class="label">Monthly payment</div><div class="value" id="l_monthly">$0</div></div>
+        <div class="kpi"><div class="label">Total interest</div><div class="value" id="l_interest">$0</div></div>
+        <div class="kpi"><div class="label">Total paid</div><div class="value" id="l_total">$0</div></div>
       </div>
-    </div>
-  </div>
-  <script src="loan.js"></script>
+      <div class="note">Simple amortized monthly payment based on entered APR and term.</div>
+    </section>
+  </main>
+
+  <script>
+    function fmt(n){return n.toLocaleString(undefined,{maximumFractionDigits:0})}
+    function calc(){
+      const P = +document.getElementById('amount').value||0;
+      const r = (+document.getElementById('apr').value||0)/100/12;
+      const n = +document.getElementById('months').value||1;
+      const m = r===0? (P/n) : (P*r)/(1-Math.pow(1+r,-n));
+      const total = m*n;
+      const interest = total-P;
+      document.getElementById('l_monthly').textContent = `$${fmt(m)}`;
+      document.getElementById('l_interest').textContent = `$${fmt(interest)}`;
+      document.getElementById('l_total').textContent = `$${fmt(total)}`;
+    }
+    document.getElementById('loanForm').addEventListener('input', calc);
+    window.addEventListener('DOMContentLoaded', calc);
+  </script>
 </body>
 </html>
