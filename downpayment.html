@@ -23,26 +23,21 @@
     .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}
     .hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}
     .hero p{margin:0;color:var(--muted)}
-
     /* Layout 40/60 split */
     .container{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:40% 60%;gap:20px;align-items:start}
     @media (max-width: 900px){.container{grid-template-columns:1fr}}
-
     .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
     .panel .inner{padding:18px}
     .panel h3{margin:0 0 12px;font-size:16px;color:#0f172a}
-
     form .field{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
     form .field:last-child{border-bottom:none}
     form label{font-weight:600;color:#111827}
     form input{width:160px;max-width:50%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff}
-
     /* Center buttons below inputs */
     .actions{display:flex;justify-content:center;gap:12px;margin-top:16px}
     .btn{cursor:pointer;border:1px solid var(--border);background:#111827;color:#fff;border-radius:999px;padding:10px 14px;font-weight:600}
     .btn.secondary{background:#fff;color:#111827}
     .btn:hover{filter:brightness(0.96)}
-
     .result{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .card{border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
     .k{color:var(--muted);font-size:12px}
@@ -58,54 +53,48 @@
         <a href="mortgage.html">Mortgage Calculator</a>
         <a href="loan.html">Loan Calculator</a>
         <a class="active" href="downpayment.html">Down Payment Calculator</a>
-        <a href="blog.html">📝 Blog</a>
       </div>
     </div>
   </nav>
-
   <section class="hero">
     <h1>🏠 Down Payment Calculator</h1>
     <p>Calculate down payment amount, percentage, and affordable home price</p>
   </section>
-
   <div class="container">
     <!-- Left: 40% inputs -->
     <div class="panel">
       <div class="inner">
         <h3>📝 Down Payment Details</h3>
         <form id="dpForm" onsubmit="return false;">
-          <div class="field"><label for="homePrice">Home Price</label><input id="homePrice" type="number" value="300000" aria-label="Home Price" /></div>
-          <div class="field"><label for="dpAmount">Down Payment Amount</label><input id="dpAmount" type="number" value="60000" aria-label="Down Payment Amount" /></div>
-          <div class="field"><label for="dpPercent">Down Payment Percentage</label><input id="dpPercent" type="number" value="20" aria-label="Down Payment Percentage" min="0" max="100" /></div>
-          <div class="field"><label for="monthlyIncome">Monthly Income (Optional)</label><input id="monthlyIncome" type="number" value="0" aria-label="Monthly Income (Optional)" /></div>
+          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price" /></div>
+          <div class="field"><label for="dpAmount">Down Payment Amount</label><input type="number" id="dpAmount" value="60000" aria-label="Down Payment Amount" /></div>
+          <div class="field"><label for="dpPercent">Down Payment Percentage</label><input type="number" id="dpPercent" value="20" min="0" max="100" aria-label="Down Payment Percentage" /></div>
+          <div class="field"><label for="monthlyIncome">Monthly Income (Optional)</label><input type="number" id="monthlyIncome" value="0" aria-label="Monthly Income (Optional)" /></div>
           <div class="actions">
-            <button id="calcBtn" class="btn" type="button">💰 Calculate</button>
-            <button id="resetBtn" class="btn secondary" type="button">🔄 Reset</button>
+            <button type="button" class="btn" id="calcBtn">💰 Calculate</button>
+            <button type="button" class="btn secondary" id="resetBtn">🔄 Reset</button>
           </div>
         </form>
       </div>
     </div>
-
     <!-- Right: 60% results -->
     <div class="panel">
       <div class="inner">
         <h3>📊 Results</h3>
         <div class="result">
-          <div class="card"><div class="k">Down Payment Amount</div><div id="outAmount" class="v">$0</div></div>
-          <div class="card"><div class="k">Down Payment Percentage</div><div id="outPercent" class="v">0%</div></div>
-          <div class="card"><div class="k">Loan Amount</div><div id="outLoan" class="v">$0</div></div>
-          <div class="card"><div class="k">Recommended Down Payment (20%)</div><div id="outReco" class="v">$0</div></div>
-          <div class="card" style="grid-column:1/-1"><div class="k">Affordable Home Price</div><div id="outAffordable" class="v">$0</div></div>
+          <div class="card"><div class="k">Down Payment Amount</div><div class="v" id="outAmount">$0</div></div>
+          <div class="card"><div class="k">Down Payment Percentage</div><div class="v" id="outPercent">0%</div></div>
+          <div class="card"><div class="k">Loan Amount</div><div class="v" id="outLoan">$0</div></div>
+          <div class="card"><div class="k">Recommended Down Payment (20%)</div><div class="v" id="outReco">$0</div></div>
+          <div class="card" style="grid-column:1/-1"><div class="k">Affordable Home Price</div><div class="v" id="outAffordable">$0</div></div>
         </div>
         <p class="k" style="margin-top:10px">*Estimates only. Consult a lender for accurate figures.</p>
       </div>
     </div>
   </div>
-
   <script>
     const $ = (id) => document.getElementById(id);
     const fmt = (n,opts={maximumFractionDigits:0}) => Number(n).toLocaleString(undefined,opts);
-
     function syncFromAmount(){
       const price = Math.max(0, parseFloat($("homePrice").value)||0);
       const amount = Math.max(0, parseFloat($("dpAmount").value)||0);
@@ -118,28 +107,23 @@
       const amount = price * percent/100;
       $("dpAmount").value = Math.max(0, Math.round(amount));
     }
-
     function calc(){
       let price = Math.max(0, parseFloat($("homePrice").value)||0);
       let amount = Math.max(0, parseFloat($("dpAmount").value)||0);
       let percent = Math.min(100, Math.max(0, parseFloat($("dpPercent").value)||0));
-
       // keep fields in sync
       if (price>0 && amount>0){ percent = amount*100/price; $("dpPercent").value = Math.round(percent*100)/100; }
       else if (price>0){ amount = price*percent/100; $("dpAmount").value = Math.round(amount); }
-
       const loan = Math.max(0, price - amount);
       const reco = Math.round(price*0.20);
       const income = Math.max(0, parseFloat($("monthlyIncome").value)||0);
       const affordable = income>0 ? Math.round((income*36) * 12) : 0; // simple ratio placeholder
-
       $("outAmount").textContent = `$${fmt(amount)}`;
       $("outPercent").textContent = `${fmt(percent,{maximumFractionDigits:2})}%`;
       $("outLoan").textContent = `$${fmt(loan)}`;
       $("outReco").textContent = `$${fmt(reco)}`;
       $("outAffordable").textContent = `$${fmt(affordable)}`;
     }
-
     document.getElementById('calcBtn').addEventListener('click', calc);
     document.getElementById('resetBtn').addEventListener('click', ()=>{ document.getElementById('dpForm').reset(); calc(); });
     document.getElementById('homePrice').addEventListener('input', ()=>{ syncFromPercent(); calc(); });
