@@ -5,125 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Down Payment Calculator - Property Calculator Hub</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    :root { --bg:#0b1020; --panel:#121733; --card:#1a2042; --accent:#6ea8fe; --accent-2:#45e0b7; --text:#e7ecff; --muted:#b7c0e6; --border:#27305a; --ring:rgba(110,168,254,.35); --radius:14px; --space:16px; --space-lg:24px; --shadow:0 8px 30px rgba(7,12,32,.35); --grid-gap:24px; --focus:0 0 0 3px var(--ring), 0 0 0 1px var(--accent); }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: radial-gradient(1200px 600px at 10% -10%, #1e2550 0%, rgba(18,23,51,0) 60%), radial-gradient(1200px 600px at 110% 10%, #102f3a 0%, rgba(18,23,51,0) 60%), var(--bg); color:var(--text); }
-    .container { max-width:1100px; margin:0 auto; padding:32px 20px 60px; }
-    .top-navigation { position:sticky; top:0; z-index:10; backdrop-filter: blur(8px); background: linear-gradient(to right, rgba(11,16,32,.6), rgba(11,16,32,.2)); border-bottom:1px solid var(--border); }
-    .nav-content { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px; }
-    .nav-logo { display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px; }
-    .nav-logo .dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 0 0 6px rgba(69,224,183,.18); }
-    .nav-menu { display:flex; gap:14px; list-style:none; margin:0; padding:0; }
-    .nav-link { display:inline-flex; align-items:center; gap:8px; color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; transition:.2s ease; border:1px solid transparent; }
-    .nav-link:hover { color:var(--text); background:rgba(106,143,255,.08); border-color:var(--border); }
-    .nav-link.active { color:var(--text); background:linear-gradient(180deg, rgba(110,168,254,.18), rgba(110,168,254,.06)); border-color:rgba(110,168,254,.35); }
-    h1 { font-size:clamp(22px, 2.4vw, 28px); margin:28px 0 8px; }
-    .subtitle { color:var(--muted); margin-bottom:28px; }
-    .calculator-grid { display:flex; gap:var(--grid-gap); align-items:start; }
-    .calculator-grid > .card:first-child { flex:0 0 50%; min-width:250px; }
-    .calculator-grid > .card:last-child { flex:0 0 50%; }
-    @media (max-width:920px){ .calculator-grid { flex-direction:column; } .calculator-grid > .card:first-child, .calculator-grid > .card:last-child { flex:1 1 auto; width:100%; } }
-    .card, .result-card { background: linear-gradient(180deg, rgba(26,32,66,.85), rgba(18,23,51,.95)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); }
-    .card{ padding:24px; }
-    .result-card{ padding:20px; }
-    .section-title{ font-weight:600; margin:0 0 14px 0; }
-    .field-grid { display:grid; grid-template-columns:1fr; gap:14px; }
-    @media (min-width:600px){ .field-grid { grid-template-columns:1fr 1fr; } }
-    .form-group { display:flex; flex-direction:column; gap:8px; }
-    label { font-size:14px; color:var(--muted); }
-    .input-wrap { position:relative; }
-    .input-wrap .prefix { position:absolute; inset-inline-start:12px; inset-block-start:50%; transform:translateY(-50%); color:var(--muted); font-size:14px; }
-    input[type="number"], select { width:100%; appearance:none; background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:10px; padding:12px 12px 12px 38px; outline:none; transition:.15s ease; }
-    input:focus, select:focus { box-shadow:var(--focus); border-color:var(--accent); }
-    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
-    .btn { border:1px solid transparent; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; }
-    .btn-primary { background:linear-gradient(180deg, #6ea8fe, #3f7ef2); color:#0b1020; }
-    .btn-primary:hover { filter:brightness(1.08); }
-    .btn-secondary { background:transparent; color:var(--text); border-color:var(--border); }
-    .btn-secondary:hover { background:rgba(255,255,255,.03); }
-    .result-header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px; }
-    .result-amount { font-size:clamp(22px, 3vw, 30px); font-weight:700; color:var(--accent-2); }
-    .breakdown { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
-    .breakdown .row { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:10px; }
-    .disclaimer { color:var(--muted); font-size:13px; margin-top:14px; }
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-    .foot-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:var(--space-lg); }
-    .foot-card { background:rgba(255,255,255,.03); border:1px dashed var(--border); border-radius:12px; padding:14px; }
-  </style>
 </head>
 <body>
-  <header class="top-navigation" role="banner">
-    <div class="nav-content" role="navigation" aria-label="Primary">
-      <div class="nav-logo" aria-label="Property Calculator Hub">
-        <div class="dot" aria-hidden="true"></div>
+  <nav class="top-navigation">
+    <div class="nav-content">
+      <div class="nav-logo">
         Property Calculator Hub
       </div>
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
-        <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
-        <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
-        <li><a href="downpayment.html" class="nav-link active">Down Payment Calculator</a></li>
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link active" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a class="nav-link" href="blog.html">📝 Blog</a></li>
       </ul>
     </div>
-  </header>
-  <main class="container">
-    <h1>💵 Down Payment Calculator</h1>
-    <p class="subtitle">Determine how much you need to save for a down payment based on your home purchase goals.</p>
-    <div class="calculator-grid">
+  </nav>
+  <div class="container">
+    <div class="hero-section">
+      <h1>🏠 Down Payment Calculator</h1>
+      <p class="hero-description">Calculate down payment amount, percentage, and affordable home price</p>
+    </div>
+    <div class="calculator-container">
       <div class="card">
-        <h2 class="section-title">📊 Input Details</h2>
-        <form id="downPaymentForm" aria-labelledby="section-title">
-          <div class="field-grid">
-            <div class="form-group">
-              <label for="homePrice">Home Price</label>
-              <div class="input-wrap">
-                <span class="prefix" aria-hidden="true">$</span>
-                <input type="number" id="homePrice" name="homePrice" value="350000" min="0" step="1000" required aria-required="true" />
+        <h2>📝 Down Payment Details</h2>
+        <form id="downPaymentForm">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="homePrice">Home Price</label>
+                <div class="field">
+                  <input type="number" id="homePrice" value="300000" min="0">
+                  <span class="suffix">$</span>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="downPaymentPercent">Down Payment (%)</label>
-              <div class="input-wrap">
-                <span class="prefix" aria-hidden="true">%</span>
-                <input type="number" id="downPaymentPercent" name="downPaymentPercent" value="20" min="0" max="100" step="0.1" required aria-required="true" />
+            <div class="col-6">
+              <div class="form-group">
+                <label for="downPayment">Down Payment Amount</label>
+                <div class="field">
+                  <input type="number" id="downPayment" value="60000" min="0">
+                  <span class="suffix">$</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="downPaymentPercent">Down Payment Percentage</label>
+                <div class="field">
+                  <input type="number" id="downPaymentPercent" value="20" min="0" max="100" step="0.1">
+                  <span class="suffix">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="monthlyIncome">Monthly Income (Optional)</label>
+                <div class="field">
+                  <input type="number" id="monthlyIncome" value="0" min="0">
+                  <span class="suffix">$</span>
+                </div>
               </div>
             </div>
           </div>
           <div class="actions">
-            <button type="submit" class="btn btn-primary" aria-label="Calculate down payment">✅ Calculate</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm()" aria-label="Reset form to default values">🔄 Reset</button>
+            <button type="button" class="btn btn-primary" onclick="calculate()">💰 Calculate</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
           </div>
         </form>
       </div>
       <div class="card">
-        <h2 class="section-title">💰 Breakdown</h2>
-        <div class="result-card">
-          <div class="result-header">
-            <span>Down Payment</span>
-            <span class="result-amount" id="downPayment" role="status" aria-live="polite">$70,000</span>
+        <h2>📊 Results</h2>
+        <div class="results">
+          <div class="result-item">
+            <span class="result-label">Down Payment Amount</span>
+            <span class="result-value" id="resultDownPayment">$0</span>
           </div>
-          <div class="breakdown">
-            <div class="row"><span>Home Price</span><strong id="displayHomePrice">$350,000</strong></div>
-            <div class="row"><span>Down %</span><strong id="displayPercent">20%</strong></div>
-            <div class="row"><span>Loan Amount</span><strong id="loanAmount">$280,000</strong></div>
-            <div class="row"><span>Estimated Closing Costs</span><strong id="closingCosts">$10,500</strong></div>
+          <div class="result-item">
+            <span class="result-label">Down Payment Percentage</span>
+            <span class="result-value" id="resultPercent">0%</span>
           </div>
-          <p class="disclaimer">This is an estimate for educational purposes only and is not financial advice. Actual terms may vary by lender and location.</p>
+          <div class="result-item">
+            <span class="result-label">Loan Amount</span>
+            <span class="result-value" id="loanAmount">$0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Recommended Down Payment (20%)</span>
+            <span class="result-value" id="recommendedDownPayment">$0</span>
+          </div>
+          <div class="result-item total">
+            <span class="result-label">Affordable Home Price</span>
+            <span class="result-value" id="affordablePrice">$0</span>
+          </div>
         </div>
-        <div class="foot-grid">
-          <div class="foot-card">
-            <strong>📈 Tip:</strong><br>
-            A 20% down payment typically helps you avoid PMI (Private Mortgage Insurance).
-          </div>
-          <div class="foot-card">
-            <strong>💳 Closing Costs:</strong><br>
-            Typically range from 2% to 5% of the home price.
-          </div>
-        </div>
+        <p class="disclaimer">*Estimates only. Consult a lender for accurate figures.</p>
       </div>
     </div>
-  </main>
+  </div>
   <script src="downpayment.js"></script>
 </body>
 </html>
