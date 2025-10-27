@@ -5,6 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Mortgage Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        .blog-card-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-card-snippet {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .blog-card-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+        
+        .blog-card-link:hover {
+            background: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,180 +103,49 @@
 
     <section class="blog-posts">
         <div class="container">
-            
-            <!-- Blog Post 1 -->
-            <article class="blog-post">
-                <div class="post-header">
-                    <h2 class="post-title">Top Mortgage Mistakes to Avoid</h2>
-                    <div class="post-meta">
-                        By Sarah Johnson | October 26, 2025
+            <div class="blog-grid">
+                <!-- Blog Card 1 -->
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">Top 10 Mortgage Mistakes First-Time Buyers Make</h2>
+                        <p class="blog-card-date">October 15, 2024</p>
+                        <p class="blog-card-snippet">
+                            Learn about the most common pitfalls that first-time homebuyers encounter when applying for a mortgage. From not checking credit scores to skipping pre-approval, avoid these costly mistakes.
+                        </p>
+                        <a href="top-mortgage-mistakes.html" class="blog-card-link">Read More</a>
                     </div>
                 </div>
-                <div class="post-content">
-                    <p>
-                        Getting a mortgage is one of the most significant financial decisions you'll make in your lifetime. Unfortunately, many first-time homebuyers make costly mistakes that could have been easily avoided with proper preparation and knowledge.
-                    </p>
-                    
-                    <h3>1. Not Shopping Around for Rates</h3>
-                    <p>
-                        One of the biggest mistakes is accepting the first mortgage offer you receive. Even a difference of 0.25% in interest rates can cost you thousands over the life of your loan. Always compare offers from at least 3-4 different lenders, including banks, credit unions, and online lenders.
-                    </p>
-                    
-                    <h3>2. Ignoring Your Credit Score</h3>
-                    <p>
-                        Your credit score directly impacts your mortgage rate and terms. Before applying for a mortgage, check your credit report and work on improving your score if needed. Pay down existing debts, don't open new credit accounts, and ensure all bills are paid on time.
-                    </p>
-                    
-                    <h3>3. Making a Too-Small Down Payment</h3>
-                    <p>
-                        While some loans allow down payments as low as 3%, putting down less than 20% typically means you'll pay private mortgage insurance (PMI). If possible, save for a larger down payment to avoid PMI and secure better loan terms.
-                    </p>
-                    
-                    <h3>4. Overlooking Additional Costs</h3>
-                    <p>
-                        Don't forget about closing costs, property taxes, homeowners insurance, and maintenance expenses. These can add up to thousands of dollars annually and should be factored into your budget from the start.
-                    </p>
-                    
-                    <h3>5. Getting Pre-Qualified Instead of Pre-Approved</h3>
-                    <p>
-                        Pre-qualification is just an estimate, while pre-approval involves a thorough review of your finances. A pre-approval letter shows sellers you're a serious buyer and can give you an edge in competitive markets.
-                    </p>
-                </div>
-            </article>
 
-            <!-- Blog Post 2 -->
-            <article class="blog-post">
-                <div class="post-header">
-                    <h2 class="post-title">How to Plan Your First Home Purchase</h2>
-                    <div class="post-meta">
-                        By Michael Chen | October 26, 2025
+                <!-- Blog Card 2 -->
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">How to Save for Your First Home Down Payment</h2>
+                        <p class="blog-card-date">September 28, 2024</p>
+                        <p class="blog-card-snippet">
+                            Discover practical strategies and tips for saving money towards your first home down payment. Learn about down payment assistance programs, budgeting techniques, and smart saving habits.
+                        </p>
+                        <a href="buying-your-first-home.html" class="blog-card-link">Read More</a>
                     </div>
                 </div>
-                <div class="post-content">
-                    <p>
-                        Buying your first home is an exciting milestone, but it requires careful planning and preparation. Here's a comprehensive guide to help you navigate the home buying process successfully.
-                    </p>
-                    
-                    <h3>Step 1: Assess Your Financial Situation</h3>
-                    <p>
-                        Before you start house hunting, take a honest look at your finances. Calculate your monthly income, expenses, and existing debts. A good rule of thumb is that your total housing costs shouldn't exceed 28% of your gross monthly income.
-                    </p>
-                    
-                    <h3>Step 2: Save for a Down Payment and Emergency Fund</h3>
-                    <p>
-                        Start saving early for your down payment. While you can put down as little as 3% with some loans, a larger down payment will save you money in the long run. Also maintain an emergency fund of 3-6 months of expenses separate from your down payment savings.
-                    </p>
-                    
-                    <h3>Step 3: Check and Improve Your Credit Score</h3>
-                    <p>
-                        Your credit score affects your mortgage rate significantly. Scores of 740 and above typically qualify for the best rates. If your score needs improvement, focus on paying bills on time and reducing credit card balances.
-                    </p>
-                    
-                    <h3>Step 4: Get Pre-Approved for a Mortgage</h3>
-                    <p>
-                        Shop around with multiple lenders to compare rates and terms. Getting pre-approved will give you a clear picture of how much you can borrow and shows sellers you're a serious buyer.
-                    </p>
-                    
-                    <h3>Step 5: Find the Right Real Estate Agent</h3>
-                    <p>
-                        Choose an agent who knows your target area well and has experience working with first-time buyers. They should be patient, communicative, and willing to educate you throughout the process.
-                    </p>
-                    
-                    <h3>Step 6: Start House Hunting</h3>
-                    <p>
-                        Make a list of your must-haves versus nice-to-haves. Consider factors like location, school districts, commute times, and future resale value. Don't fall in love with the first house you see – take time to explore your options.
-                    </p>
-                    
-                    <h3>Step 7: Make an Offer and Close</h3>
-                    <p>
-                        When you find the right home, work with your agent to make a competitive offer. Once accepted, you'll need a home inspection, finalize your mortgage, and handle the closing process.
-                    </p>
-                </div>
-            </article>
 
-            <!-- Blog Post 3 -->
-            <article class="blog-post">
-                <div class="post-header">
-                    <h2 class="post-title">Understanding Fixed vs Adjustable Rate Mortgages</h2>
-                    <div class="post-meta">
-                        By Amanda Rodriguez | October 26, 2025
+                <!-- Blog Card 3 -->
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">Fixed vs. Adjustable Rate Mortgages: Which is Right for You?</h2>
+                        <p class="blog-card-date">September 10, 2024</p>
+                        <p class="blog-card-snippet">
+                            Understand the key differences between fixed-rate and adjustable-rate mortgages. We break down the pros and cons of each to help you make an informed decision for your financial situation.
+                        </p>
+                        <a href="fixed-vs-adjustable.html" class="blog-card-link">Read More</a>
                     </div>
                 </div>
-                <div class="post-content">
-                    <p>
-                        Choosing between a fixed-rate and adjustable-rate mortgage (ARM) is one of the most important decisions you'll make when financing your home. Each option has distinct advantages and disadvantages depending on your financial situation and long-term plans.
-                    </p>
-                    
-                    <h3>Fixed-Rate Mortgages: Stability and Predictability</h3>
-                    <p>
-                        With a fixed-rate mortgage, your interest rate remains constant throughout the entire loan term, typically 15 or 30 years. This means your principal and interest payment will never change, making budgeting easier and providing protection against rising interest rates.
-                    </p>
-                    
-                    <h3>Advantages of Fixed-Rate Mortgages:</h3>
-                    <ul>
-                        <li>Predictable monthly payments</li>
-                        <li>Protection from interest rate increases</li>
-                        <li>Easier to budget and plan finances</li>
-                        <li>Peace of mind for risk-averse borrowers</li>
-                    </ul>
-                    
-                    <h3>Disadvantages:</h3>
-                    <ul>
-                        <li>Higher initial rates compared to ARMs</li>
-                        <li>No benefit if interest rates decrease</li>
-                        <li>Less flexibility</li>
-                    </ul>
-                    
-                    <h3>Adjustable-Rate Mortgages: Lower Initial Rates with Risk</h3>
-                    <p>
-                        ARMs typically start with a lower interest rate for an initial period (usually 3, 5, 7, or 10 years), after which the rate adjusts periodically based on market conditions. The initial lower rate can result in significant savings during the fixed period.
-                    </p>
-                    
-                    <h3>Advantages of Adjustable-Rate Mortgages:</h3>
-                    <ul>
-                        <li>Lower initial interest rates and payments</li>
-                        <li>Potential for rates to decrease over time</li>
-                        <li>Good for short-term homeownership</li>
-                        <li>More money available for other investments initially</li>
-                    </ul>
-                    
-                    <h3>Disadvantages:</h3>
-                    <ul>
-                        <li>Payment uncertainty after the initial period</li>
-                        <li>Risk of significantly higher payments</li>
-                        <li>Complexity in understanding rate adjustment mechanisms</li>
-                        <li>Potential for payment shock</li>
-                    </ul>
-                    
-                    <h3>Which Option is Right for You?</h3>
-                    <p><strong>Choose a Fixed-Rate Mortgage if:</strong></p>
-                    <ul>
-                        <li>You plan to stay in your home for many years</li>
-                        <li>You prefer predictable payments</li>
-                        <li>Interest rates are currently low</li>
-                        <li>You're risk-averse</li>
-                    </ul>
-                    
-                    <p><strong>Choose an Adjustable-Rate Mortgage if:</strong></p>
-                    <ul>
-                        <li>You plan to move or refinance within the initial fixed period</li>
-                        <li>You can handle payment variability</li>
-                        <li>You want to take advantage of lower initial rates</li>
-                        <li>You expect interest rates to decrease or remain stable</li>
-                    </ul>
-                    
-                    <p>
-                        Ultimately, the choice between fixed and adjustable-rate mortgages depends on your personal financial situation, risk tolerance, and long-term plans. Consider consulting with a mortgage professional to determine which option aligns best with your goals.
-                    </p>
-                </div>
-            </article>
-
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Mortgage Calculator. All rights reserved.</p>
+            <p>&copy; 2024 Mortgage Calculator. All rights reserved.</p>
         </div>
     </footer>
 </body>
