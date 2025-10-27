@@ -20,8 +20,10 @@
     .nav-link.active { color:var(--text); background:linear-gradient(180deg, rgba(110,168,254,.18), rgba(110,168,254,.06)); border-color:rgba(110,168,254,.35); }
     h1 { font-size:clamp(22px, 2.4vw, 28px); margin:28px 0 8px; }
     .subtitle { color:var(--muted); margin-bottom:28px; }
-    .calculator-grid { display:grid; grid-template-columns:1fr; gap:var(--grid-gap); }
-    @media (min-width:920px){ .calculator-grid { grid-template-columns: 1.05fr .95fr; } }
+    .calculator-grid { display:flex; gap:var(--grid-gap); align-items:start; }
+    .calculator-grid > .card:first-child { flex:0 0 30%; min-width:250px; }
+    .calculator-grid > .card:last-child { flex:1; }
+    @media (max-width:920px){ .calculator-grid { flex-direction:column; } .calculator-grid > .card:first-child, .calculator-grid > .card:last-child { flex:1 1 auto; width:100%; } }
     .card, .result-card { background: linear-gradient(180deg, rgba(26,32,66,.85), rgba(18,23,51,.95)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); }
     .card{ padding:24px; }
     .result-card{ padding:20px; }
@@ -54,148 +56,74 @@
   <header class="top-navigation" role="banner">
     <div class="nav-content" role="navigation" aria-label="Primary">
       <div class="nav-logo" aria-label="Property Calculator Hub">
-        <span class="dot" aria-hidden="true"></span>
-        <a class="nav-link" href="/" aria-label="Home">Property Calculator Hub</a>
+        <div class="dot" aria-hidden="true"></div>
+        <span>Property Calculator Hub</span>
       </div>
-      <nav aria-label="Calculators">
-        <ul class="nav-menu">
-          <li><a class="nav-link" href="/mortgage.html">Mortgage</a></li>
-          <li><a class="nav-link" href="/loan.html">Loan</a></li>
-          <li><a class="nav-link active" href="/downpayment.html" aria-current="page">Down Payment</a></li>
-          <li><a class="nav-link" href="/blog.html">Blog</a></li>
-        </ul>
-      </nav>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link active" href="downpayment.html">Down Payment Calculator</a></li>
+      </ul>
     </div>
   </header>
-
-  <main class="container" id="main-content">
-    <h1>Down Payment Calculator</h1>
-    <p class="subtitle">Estimate how much down payment you need and how it impacts your monthly payment.</p>
-
-    <section class="calculator-grid" aria-label="Down payment calculator">
-      <div class="card" role="region" aria-labelledby="inputs-title">
-        <h2 id="inputs-title" class="section-title">Inputs</h2>
-        <div class="field-grid">
-          <div class="form-group">
-            <label for="homePrice">Home price</label>
-            <div class="input-wrap">
-              <span class="prefix" aria-hidden="true">$</span>
-              <input id="homePrice" name="homePrice" type="number" inputmode="decimal" min="0" step="1000" placeholder="400000" aria-describedby="homePriceHelp" />
+  <main class="container">
+    <h1>💵 Down Payment Calculator</h1>
+    <p class="subtitle">Determine how much you need to save for a down payment based on your home purchase goals.</p>
+    <div class="calculator-grid">
+      <div class="card">
+        <h2 class="section-title">📊 Input Details</h2>
+        <form id="downPaymentForm" aria-labelledby="section-title">
+          <div class="field-grid">
+            <div class="form-group">
+              <label for="homePrice">Home Price</label>
+              <div class="input-wrap">
+                <span class="prefix" aria-hidden="true">$</span>
+                <input type="number" id="homePrice" name="homePrice" value="350000" min="0" step="1000" required aria-required="true" />
+              </div>
             </div>
-            <small id="homePriceHelp" class="sr-only">Enter the estimated home price</small>
-          </div>
-          <div class="form-group">
-            <label for="downPercent">Down payment percent</label>
-            <div class="input-wrap">
-              <span class="prefix" aria-hidden="true">%</span>
-              <input id="downPercent" name="downPercent" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="20" aria-describedby="downPercentHelp" />
-            </div>
-            <small id="downPercentHelp" class="sr-only">Percentage of the home price used for down payment</small>
-          </div>
-          <div class="form-group">
-            <label for="loanTerm">Loan term</label>
-            <select id="loanTerm" name="loanTerm">
-              <option value="30" selected>30 years</option>
-              <option value="20">20 years</option>
-              <option value="15">15 years</option>
-              <option value="10">10 years</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="interestRate">Interest rate</label>
-            <div class="input-wrap">
-              <span class="prefix" aria-hidden="true">%</span>
-              <input id="interestRate" name="interestRate" type="number" inputmode="decimal" min="0" step="0.01" placeholder="6.75" />
+            <div class="form-group">
+              <label for="downPaymentPercent">Down Payment (%)</label>
+              <div class="input-wrap">
+                <span class="prefix" aria-hidden="true">%</span>
+                <input type="number" id="downPaymentPercent" name="downPaymentPercent" value="20" min="0" max="100" step="0.1" required aria-required="true" />
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="propertyTax">Annual property tax</label>
-            <div class="input-wrap">
-              <span class="prefix" aria-hidden="true">$</span>
-              <input id="propertyTax" name="propertyTax" type="number" inputmode="decimal" min="0" step="100" placeholder="3600" />
-            </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" aria-label="Calculate down payment">✅ Calculate</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()" aria-label="Reset form to default values">🔄 Reset</button>
           </div>
-          <div class="form-group">
-            <label for="homeInsurance">Annual home insurance</label>
-            <div class="input-wrap">
-              <span class="prefix" aria-hidden="true">$</span>
-              <input id="homeInsurance" name="homeInsurance" type="number" inputmode="decimal" min="0" step="50" placeholder="1200" />
-            </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2 class="section-title">💰 Breakdown</h2>
+        <div class="result-card">
+          <div class="result-header">
+            <span>Down Payment</span>
+            <span class="result-amount" id="downPayment" role="status" aria-live="polite">$70,000</span>
           </div>
+          <div class="breakdown">
+            <div class="row"><span>Home Price</span><strong id="displayHomePrice">$350,000</strong></div>
+            <div class="row"><span>Down %</span><strong id="displayPercent">20%</strong></div>
+            <div class="row"><span>Loan Amount</span><strong id="loanAmount">$280,000</strong></div>
+            <div class="row"><span>Estimated Closing Costs</span><strong id="closingCosts">$10,500</strong></div>
+          </div>
+          <p class="disclaimer">This is an estimate for educational purposes only and is not financial advice. Actual terms may vary by lender and location.</p>
         </div>
-        <div class="actions">
-          <button class="btn btn-primary" id="calcBtn" type="button">Calculate</button>
-          <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+        <div class="foot-grid">
+          <div class="foot-card">
+            <strong>📈 Tip:</strong><br/>
+            A 20% down payment typically helps you avoid PMI (Private Mortgage Insurance).
+          </div>
+          <div class="foot-card">
+            <strong>💳 Closing Costs:</strong><br/>
+            Typically range from 2% to 5% of the home price.
+          </div>
         </div>
       </div>
-
-      <div class="result-card" role="region" aria-labelledby="results-title">
-        <h2 id="results-title" class="section-title">Results</h2>
-        <div class="result-header">
-          <div>
-            <div aria-live="polite" aria-atomic="true">Estimated monthly payment</div>
-            <div class="result-amount" id="monthlyPayment" aria-live="polite" aria-atomic="true">$0</div>
-          </div>
-          <div>
-            <div aria-live="polite" aria-atomic="true">Down payment</div>
-            <div class="result-amount" id="downPayment" aria-live="polite" aria-atomic="true">$0</div>
-          </div>
-        </div>
-        <div class="breakdown" aria-live="polite" aria-atomic="true">
-          <div class="row"><span>Principal & Interest</span><strong id="pi">$0</strong></div>
-          <div class="row"><span>Property Tax</span><strong id="tax">$0</strong></div>
-          <div class="row"><span>Home Insurance</span><strong id="ins">$0</strong></div>
-          <div class="row"><span>Loan Amount</span><strong id="loanAmount">$0</strong></div>
-        </div>
-        <p class="disclaimer">This is an estimate for educational purposes only and is not financial advice. Actual terms may vary by lender and location.</p>
-      </div>
-    </section>
-
-    <section class="foot-grid" aria-label="Helpful links">
-      <div class="foot-card">Tip: Increasing your down payment reduces the loan amount and monthly interest.</div>
-      <div class="foot-card">Compare scenarios by adjusting rate and term to see payment impact.</div>
-      <div class="foot-card">Remember to include taxes and insurance when budgeting for total monthly cost.</div>
-    </section>
+    </div>
   </main>
-
-  <script>
-    function toNumber(v){ if(typeof v==="number") return v; if(!v) return 0; return parseFloat((""+v).replace(/,/g, '')) || 0; }
-    function fmt(n){ return n.toLocaleString(undefined,{maximumFractionDigits:0}); }
-    function calc(){
-      const price = toNumber(document.getElementById('homePrice').value);
-      const dpPct = toNumber(document.getElementById('downPercent').value)/100;
-      const years = parseInt(document.getElementById('loanTerm').value,10);
-      const rate = toNumber(document.getElementById('interestRate').value)/100;
-      const taxAnnual = toNumber(document.getElementById('propertyTax').value);
-      const insAnnual = toNumber(document.getElementById('homeInsurance').value);
-      const down = price * dpPct;
-      const loan = Math.max(price - down, 0);
-      const mRate = rate/12;
-      const n = years*12;
-      const pi = rate > 0 && n>0 ? loan * (mRate*Math.pow(1+mRate,n)) / (Math.pow(1+mRate,n)-1) : (n>0? loan/n : 0);
-      const taxM = taxAnnual/12;
-      const insM = insAnnual/12;
-      const total = pi + taxM + insM;
-      document.getElementById('downPayment').textContent = '$' + fmt(Math.round(down));
-      document.getElementById('loanAmount').textContent = '$' + fmt(Math.round(loan));
-      document.getElementById('pi').textContent = '$' + fmt(Math.round(pi));
-      document.getElementById('tax').textContent = '$' + fmt(Math.round(taxM));
-      document.getElementById('ins').textContent = '$' + fmt(Math.round(insM));
-      document.getElementById('monthlyPayment').textContent = '$' + fmt(Math.round(total));
-    }
-    function resetForm(){
-      document.getElementById('homePrice').value = '';
-      document.getElementById('downPercent').value = '';
-      document.getElementById('loanTerm').value = '30';
-      document.getElementById('interestRate').value = '';
-      document.getElementById('propertyTax').value = '';
-      document.getElementById('homeInsurance').value = '';
-      document.getElementById('downPayment').textContent = '$0';
-      document.getElementById('loanAmount').textContent = '$0';
-      document.getElementById('pi').textContent = '$0';
-      document.getElementById('tax').textContent = '$0';
-      document.getElementById('ins').textContent = '$0';
-      document.getElementById('monthlyPayment').textContent = '$0';
-    }
-    document.getElementById('calcBtn')?.addEventListener('click', calc);
-    document.getElementById('resetBtn')?.
+  <script src="downpayment.js"></script>
+</body>
+</html>
