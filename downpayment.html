@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Down Payment Calculator - Property Calculator Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="top-navigation">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h2>Property Calculator Hub</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
+                    <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
+                    <li><a href="downpayment.html" class="nav-link active">Down Payment Calculator</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <h1>Down Payment Calculator</h1>
+
+        <div class="calculator-grid">
+            <div class="card">
+                <form id="downPaymentForm" onsubmit="event.preventDefault(); calculateDownPayment();">
+                    <div class="form-group">
+                        <label for="dpHomePrice">Home Price</label>
+                        <input type="number" id="dpHomePrice" value="400000" min="0" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="dpDownPaymentPercent">Down Payment (%)</label>
+                        <input type="number" id="dpDownPaymentPercent" value="20" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="dpClosingCostPercent">Closing Costs (%)</label>
+                        <input type="number" id="dpClosingCostPercent" value="3" min="0" max="10" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dpInterestRate">Interest Rate (%)</label>
+                        <input type="number" id="dpInterestRate" value="7.0" min="0" max="20" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dpLoanTerm">Loan Term (Years)</label>
+                        <select id="dpLoanTerm">
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="30" selected>30 years</option>
+                        </select>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12);">
+                        <button type="submit">Calculate</button>
+                        <button type="button" onclick="clearDownPayment()" style="background-color: var(--color-secondary); color: var(--color-text);">Clear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="result-card">
+                <div class="monthly-payment">
+                    <h2>Down Payment Required</h2>
+                    <div class="payment-amount" id="dpDownPaymentAmount">$0.00</div>
+                </div>
+                <div class="breakdown">
+                    <div class="breakdown-item">
+                        <h3>Down Payment</h3>
+                        <p id="dpDownPayment">$0.00</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Closing Costs</h3>
+                        <p id="dpClosingCost">$0.00</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Loan Amount</h3>
+                        <p id="dpLoanAmount">$0.00</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Monthly Payment</h3>
+                        <p id="dpMonthlyPayment">$0.00</p>
+                    </div>
+                </div>
+                <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-24) 0;">
+                <div class="summary-section">
+                    <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--space-16); color: var(--color-text);">Purchase Summary</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Home Price</span>
+                        <span class="summary-value" id="dpSummaryHomePrice">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Down Payment (%)</span>
+                        <span class="summary-value" id="dpSummaryPercent">0%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Down Payment ($)</span>
+                        <span class="summary-value" id="dpSummaryAmount">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Closing Costs</span>
+                        <span class="summary-value" id="dpSummaryClosing">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Cash Needed</span>
+                        <span class="summary-value" id="dpSummaryTotalCash">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Amount</span>
+                        <span class="summary-value" id="dpSummaryLoan">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Est. Monthly Payment</span>
+                        <span class="summary-value" id="dpSummaryMonthly">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">PMI Required</span>
+                        <span class="summary-value" id="dpPMIStatus">No</span>
+                    </div>
+                </div>
+                <div style="margin-top: var(--space-24); padding: var(--space-16); background-color: var(--color-secondary); border-radius: var(--radius-base); font-size: var(--font-size-sm);">
+                    <p style="margin: 0; color: var(--color-text-secondary);">
+                        <strong>Tip:</strong> A 20% down payment helps you avoid PMI (Private Mortgage Insurance), which can save you money on monthly payments.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="downpayment.js"></script>
+</body>
+</html>
