@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator - Property Calculator Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="top-navigation">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h2>Property Calculator Hub</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
+                    <li><a href="loan.html" class="nav-link active">Loan Calculator</a></li>
+                    <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <h1>Loan Calculator</h1>
+
+        <div class="calculator-grid">
+            <div class="card">
+                <form id="loanForm" onsubmit="event.preventDefault(); calculateLoan();">
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount</label>
+                        <input type="number" id="loanAmountInput" value="100000" min="0" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="loanTermYears">Loan Term</label>
+                        <div style="display: flex; gap: var(--space-8);">
+                            <input type="number" id="loanTermYears" value="10" min="0" max="50" step="1" placeholder="Years" style="flex: 1;">
+                            <input type="number" id="loanTermMonths" value="0" min="0" max="11" step="1" placeholder="Months" style="flex: 1;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanInterestRate">Interest Rate (%)</label>
+                        <input type="number" id="loanInterestRate" value="6.0" min="0" max="20" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="compound">Compound</label>
+                        <select id="compound">
+                            <option value="12">Monthly (APR)</option>
+                            <option value="1">Annually (APY)</option>
+                            <option value="2">Semi-annually</option>
+                            <option value="4">Quarterly</option>
+                            <option value="24">Semi-monthly</option>
+                            <option value="26">Biweekly</option>
+                            <option value="52">Weekly</option>
+                            <option value="365">Daily</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payback">Pay Back</label>
+                        <select id="payback">
+                            <option value="12">Every Month</option>
+                            <option value="365">Every Day</option>
+                            <option value="52">Every Week</option>
+                            <option value="26">Every 2 Weeks</option>
+                            <option value="24">Every Half Month</option>
+                            <option value="4">Every Quarter</option>
+                            <option value="2">Every 6 Months</option>
+                            <option value="1">Every Year</option>
+                        </select>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12);">
+                        <button type="submit">Calculate</button>
+                        <button type="button" onclick="clearLoan()" style="background-color: var(--color-secondary); color: var(--color-text);">Clear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="result-card">
+                <div class="monthly-payment">
+                    <h2>Payment Every Period</h2>
+                    <div class="payment-amount" id="loanPayment">$0.00</div>
+                </div>
+                <div class="breakdown">
+                    <div class="breakdown-item">
+                        <h3>Total Payments</h3>
+                        <p id="totalPayments">$0.00</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Total Interest</h3>
+                        <p id="loanTotalInterest">$0.00</p>
+                    </div>
+                </div>
+                <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-24) 0;">
+                <div class="summary-section">
+                    <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--space-16); color: var(--color-text);">Loan Summary</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Amount</span>
+                        <span class="summary-value" id="loanSummaryAmount">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Interest Rate</span>
+                        <span class="summary-value" id="loanSummaryRate">0.00%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Term</span>
+                        <span class="summary-value" id="loanSummaryTerm">0 years</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label" id="numberOfPaymentsLabel">Number of Payments</span>
+                        <span class="summary-value" id="loanSummaryPayments">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Interest</span>
+                        <span class="summary-value" id="loanSummaryTotalInterest">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Payoff Date</span>
+                        <span class="summary-value" id="loanPayoffDate">Jan. 2035</span>
+                    </div>
+                </div>
+                <div style="margin-top: var(--space-24); text-align: center;">
+                    <canvas id="loanPieChart" width="250" height="250"></canvas>
+                    <div id="loanChartLegend" style="margin-top: var(--space-16); display: flex; justify-content: center; gap: var(--space-24);"></div>
+                </div>
+            </div>
+        </div>
+        <div class="amortization-schedule">
+            <h2>Amortization Schedule</h2>
+            <div class="card">
+                <div class="table-container">
+                    <table id="loanAmortizationTable">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Date</th>
+                                <th>Interest</th>
+                                <th>Principal</th>
+                                <th>Ending Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loanScheduleBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="loan.js"></script>
+</body>
+</html>
