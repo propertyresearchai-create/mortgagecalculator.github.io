@@ -10,116 +10,135 @@
   <style>
     :root{--bg:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--card:#ffffff;--brand:#2563eb;--brand-700:#1d4ed8;--accent:#f59e0b;--chip:#f3f4f6}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
     a{color:var(--brand);text-decoration:none}a:hover{color:var(--brand-700);text-decoration:underline}
     .top-nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50}
     .top-nav .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
     .brand{display:flex;gap:10px;align-items:center;font-weight:700;color:#111827}.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
     .menu{display:flex;gap:18px;flex-wrap:wrap}.menu a{color:#111827;font-weight:600;padding:6px 8px;border-radius:6px}.menu a.active{color:var(--brand)}
     .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}.hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}.hero p{margin:0;color:var(--muted)}
-    .grid{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
-    @media(max-width:960px){.grid{grid-template-columns:1fr}}
+    .grid{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:flex;gap:22px}
+    .left,.right{flex:1}.left{max-width:620px}
+    @media (max-width:960px){.grid{flex-direction:column}.left{max-width:none}}
     .card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:18px}
     .card h2{margin:0 0 12px;font-size:18px;color:#111827}.card .sub{color:var(--muted);font-size:13px;margin-top:-6px;margin-bottom:10px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.row{grid-template-columns:1fr}}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:700px){.row{grid-template-columns:1fr}}
     label{font-size:13px;color:#374151;font-weight:600;display:block;margin:10px 0 6px}
-    input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#111827}
+    input[type=number]{width:100%;appearance:textfield;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;color:#111827}
+    input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .inline-suffix{display:flex;align-items:center;gap:8px}
+    .inline-suffix span{background:var(--chip);border:1px solid var(--border);color:#374151;font-size:12px;border-radius:6px;padding:6px 8px;white-space:nowrap}
+    .actions{display:flex;gap:10px;margin-top:14px}
+    .btn{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:10px 14px;font-weight:600;cursor:pointer}
+    .btn.secondary{background:#f3f4f6;color:#111827;border:1px solid var(--border)}.btn:hover{background:var(--brand-700)}
     .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     .kpi{background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:12px}
     .kpi .label{font-size:12px;color:var(--muted)}.kpi .value{font-size:18px;font-weight:700;color:#111827}
     .note{font-size:12px;color:var(--muted);margin-top:8px}
-    [class*="container" i]{max-width:unset}
   </style>
 </head>
 <body>
   <nav class="top-nav">
     <div class="wrap">
-      <div class="brand"><span class="dot"></span> Property Calculator Hub</div>
+      <div class="brand"><div class="dot"></div>Property Calculator Hub</div>
       <div class="menu">
-        <a href="index.html">Home</a>
-        <a href="mortgage.html">Mortgage</a>
-        <a href="loan.html">Loan</a>
-        <a href="downpayment.html" class="active">Down Payment</a>
-        <a href="blog.html">Blog</a>
+        <a href="/mortgagecalculator.github.io/index.html">🏠 Home</a>
+        <a href="/mortgagecalculator.github.io/mortgage.html">Mortgage Calculator</a>
+        <a href="/mortgagecalculator.github.io/loan.html">Loan Calculator</a>
+        <a href="/mortgagecalculator.github.io/downpayment.html" class="active">Down Payment Calculator</a>
+        <a href="/mortgagecalculator.github.io/blog.html">📝 Blog</a>
       </div>
     </div>
   </nav>
 
   <header class="hero">
-    <h1>Down Payment Calculator</h1>
-    <p>Find your down payment amount, percent, and resulting loan.</p>
+    <h1>🏠 Down Payment Calculator</h1>
+    <p>Calculate down payment amount, percentage, and affordable home price</p>
   </header>
 
-  <main class="grid">
-    <section class="card" aria-labelledby="inputs">
-      <h2 id="inputs">Inputs</h2>
-      <div class="sub">Adjust values to see updated results.</div>
+  <section class="grid">
+    <div class="left card">
+      <h2>📝 Down Payment Details</h2>
       <form id="dpForm">
         <div class="row">
           <div>
-            <label for="price">Home price</label>
-            <input type="number" id="price" value="300000" min="0" />
+            <label for="price">Home Price</label>
+            <div class="inline-suffix"><input id="price" type="number" value="300000" min="0" step="1000" /><span>$</span></div>
           </div>
           <div>
-            <label for="amount">Down payment ($)</label>
-            <input type="number" id="amount" value="60000" min="0" />
+            <label for="dpAmount">Down Payment Amount</label>
+            <div class="inline-suffix"><input id="dpAmount" type="number" value="60000" min="0" step="500" /><span>$</span></div>
           </div>
           <div>
-            <label for="percent">Down payment (%)</label>
-            <input type="number" id="percent" value="20" min="0" max="100" step="0.1" />
+            <label for="dpPercent">Down Payment Percentage</label>
+            <div class="inline-suffix"><input id="dpPercent" type="number" value="20" min="0" max="100" step="0.1" /><span>%</span></div>
           </div>
           <div>
-            <label for="income">Monthly income (optional)</label>
-            <input type="number" id="income" value="0" min="0" />
+            <label for="income">Monthly Income (Optional)</label>
+            <div class="inline-suffix"><input id="income" type="number" value="0" min="0" step="100" /><span>$</span></div>
           </div>
         </div>
+        <div class="actions">
+          <button type="button" id="calcDp" class="btn">💰 Calculate</button>
+          <button type="button" id="resetDp" class="btn secondary">🔄 Reset</button>
+        </div>
       </form>
-    </section>
+    </div>
 
-    <section class="card" aria-labelledby="results">
-      <h2 id="results">Results</h2>
+    <div class="right card">
+      <h2>📊 Results</h2>
       <div class="kpis">
-        <div class="kpi"><div class="label">Down payment</div><div class="value" id="r_amount">$0</div></div>
-        <div class="kpi"><div class="label">Down payment percent</div><div class="value" id="r_percent">0%</div></div>
-        <div class="kpi"><div class="label">Loan amount</div><div class="value" id="r_loan">$0</div></div>
-        <div class="kpi"><div class="label">Recommended 20%</div><div class="value" id="r_reco">$0</div></div>
+        <div class="kpi"><div class="label">Down Payment Amount</div><div class="value" id="r_amount">$0</div></div>
+        <div class="kpi"><div class="label">Down Payment Percentage</div><div class="value" id="r_percent">0%</div></div>
+        <div class="kpi"><div class="label">Loan Amount</div><div class="value" id="r_loan">$0</div></div>
+        <div class="kpi"><div class="label">Recommended Down Payment (20%)</div><div class="value" id="r_reco">$0</div></div>
+        <div class="kpi"><div class="label">Affordable Home Price</div><div class="value" id="r_afford">$0</div></div>
       </div>
-      <div class="note">Estimates only. Consult a lender for precise details.</div>
-    </section>
-  </main>
+      <div class="note">*Estimates only. Consult a lender for accurate figures.</div>
+    </div>
+  </section>
 
   <script>
-    function fmt(n,opts){return n.toLocaleString(undefined,{maximumFractionDigits:(opts&&opts.dp)||0})}
+    const $ = (x)=> document.getElementById(x);
+    const fmt = (n,opts)=> (isFinite(n)? n:0).toLocaleString(undefined,{maximumFractionDigits:(opts&&opts.dp)||0});
+
     function syncByAmount(){
-      const price = +document.getElementById('price').value||0;
-      const amount = +document.getElementById('amount').value||0;
-      const pct = price? (amount*100/price):0;
-      document.getElementById('percent').value = Math.min(100,Math.max(0, +pct.toFixed(1)));
+      const price = +$('price').value||0;
+      const amount = +$('dpAmount').value||0;
+      const pct = price ? (amount*100/price) : 0;
+      $('dpPercent').value = Math.min(100, Math.max(0, +pct.toFixed(1)));
       update();
     }
     function syncByPercent(){
-      const price = +document.getElementById('price').value||0;
-      const pct = Math.min(100,Math.max(0,+document.getElementById('percent').value||0));
-      const amount = price*pct/100;
-      document.getElementById('amount').value = Math.max(0, Math.round(amount));
+      const price = +$('price').value||0;
+      const pct = Math.min(100, Math.max(0, +$('dpPercent').value||0));
+      const amount = price * pct / 100;
+      $('dpAmount').value = Math.max(0, Math.round(amount));
       update();
     }
     function update(){
-      const price = +document.getElementById('price').value||0;
-      const amount = +document.getElementById('amount').value||0;
+      const price = +$('price').value||0;
+      const amount = +$('dpAmount').value||0;
       const pct = price? amount*100/price : 0;
       const loan = Math.max(0, price-amount);
       const reco = price*0.20;
-      document.getElementById('r_amount').textContent = `$${fmt(amount)}`;
-      document.getElementById('r_percent').textContent = `${fmt(pct,{dp:1})}%`;
-      document.getElementById('r_loan').textContent = `$${fmt(loan)}`;
-      document.getElementById('r_reco').textContent = `$${fmt(reco)}`;
+      const income = +$('income').value||0;
+      const afford = income>0 ? Math.max(0, Math.round((income*12)/0.28)) : 0; // rough 28% rule
+      $('r_amount').textContent = `$${fmt(amount)}`;
+      $('r_percent').textContent = `${fmt(pct,{dp:1})}%`;
+      $('r_loan').textContent = `$${fmt(loan)}`;
+      $('r_reco').textContent = `$${fmt(reco)}`;
+      $('r_afford').textContent = `$${fmt(afford)}`;
     }
 
-    document.getElementById('amount').addEventListener('input', syncByAmount);
-    document.getElementById('percent').addEventListener('input', syncByPercent);
-    document.getElementById('price').addEventListener('input', update);
-    document.getElementById('income').addEventListener('input', update);
+    $('dpAmount').addEventListener('input', syncByAmount);
+    $('dpPercent').addEventListener('input', syncByPercent);
+    $('price').addEventListener('input', update);
+    $('income').addEventListener('input', update);
+
+    document.getElementById('calcDp').addEventListener('click', update);
+    document.getElementById('resetDp').addEventListener('click', ()=>{ document.getElementById('dpForm').reset(); update(); });
+
     window.addEventListener('DOMContentLoaded', update);
   </script>
 </body>
