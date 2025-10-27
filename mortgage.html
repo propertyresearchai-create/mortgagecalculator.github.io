@@ -16,15 +16,14 @@
       --card:#ffffff;
       --brand:#2563eb; /* blue-600 */
       --brand-700:#1d4ed8; /* blue-700 */
-      --accent:#f59e0b; /* amber-500 (orange highlight) */
+      --accent:#f59e0b; /* amber-500 */
       --chip:#f3f4f6; /* gray-100 */
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
     a{color:var(--brand);text-decoration:none}
     a:hover{color:var(--brand-700);text-decoration:underline}
 
-    /* Top navigation consistent with homepage/blog */
     .top-nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50}
     .top-nav .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
     .brand{display:flex;gap:10px;align-items:center;font-weight:700;color:#111827}
@@ -33,14 +32,16 @@
     .menu a{color:#111827;font-weight:600;padding:6px 8px;border-radius:6px}
     .menu a.active{color:var(--brand)}
 
-    /* Page header */
     .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}
     .hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}
     .hero p{margin:0;color:var(--muted)}
 
-    /* Layout */
-    .grid{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
-    @media (max-width: 960px){.grid{grid-template-columns:1fr;}}
+    /* Two-column split layout */
+    .grid{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:flex;gap:22px}
+    .left,.right{flex:1}
+    .left{max-width:620px}
+
+    @media (max-width: 960px){.grid{flex-direction:column}.left{max-width:none}}
 
     /* Card */
     .card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:18px}
@@ -51,126 +52,144 @@
     .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media (max-width:700px){.row{grid-template-columns:1fr}}
     label{font-size:13px;color:#374151;font-weight:600;display:block;margin:10px 0 6px}
-    input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#111827}
-    .hint{font-size:12px;color:var(--muted)}
+    input[type=number]{width:100%;appearance:textfield;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;color:#111827}
+    input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .inline-suffix{display:flex;align-items:center;gap:8px}
+    .inline-suffix span{background:var(--chip);border:1px solid var(--border);color:#374151;font-size:12px;border-radius:6px;padding:6px 8px;white-space:nowrap}
+
+    .actions{display:flex;gap:10px;margin-top:14px}
+    .btn{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:10px 14px;font-weight:600;cursor:pointer}
+    .btn.secondary{background:#f3f4f6;color:#111827;border:1px solid var(--border)}
+    .btn:hover{background:var(--brand-700)}
 
     /* Results */
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    @media (max-width:960px){.kpis{grid-template-columns:1fr 1fr}}
-    .kpi{background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:12px}
-    .kpi .label{font-size:12px;color:var(--muted)}
-    .kpi .value{font-size:18px;font-weight:700;color:#111827}
-    .accent{color:var(--accent)}
+    .stat{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px dashed var(--border);border-radius:10px;background:#fff}
+    .stat + .stat{margin-top:10px}
+    .stat .label{color:#374151;font-size:13px}
+    .stat .value{font-weight:700;color:#0f172a}
 
-    /* Chart */
-    .chart-wrap{display:flex;align-items:center;justify-content:center;padding:8px}
-    canvas{max-width:100%;height:auto}
-
-    /* Footer note */
-    .note{font-size:12px;color:var(--muted);margin-top:8px}
-
-    /* Remove conflicting legacy styles potentially loaded elsewhere */
-    [class*="container" i]{max-width:unset}
+    .chart-wrap{margin-top:14px}
+    .disclaimer{color:var(--muted);font-size:12px;margin-top:10px}
   </style>
 </head>
 <body>
   <nav class="top-nav">
     <div class="wrap">
-      <div class="brand"><span class="dot"></span> Property Calculator Hub</div>
+      <div class="brand"><div class="dot"></div>Property Calculator Hub</div>
       <div class="menu">
-        <a href="index.html">Home</a>
-        <a href="mortgage.html" class="active">Mortgage</a>
-        <a href="loan.html">Loan</a>
-        <a href="downpayment.html">Down Payment</a>
-        <a href="blog.html">Blog</a>
+        <a href="/mortgagecalculator.github.io/index.html">🏠 Home</a>
+        <a href="/mortgagecalculator.github.io/mortgage.html" class="active">Mortgage Calculator</a>
+        <a href="/mortgagecalculator.github.io/loan.html">Loan Calculator</a>
+        <a href="/mortgagecalculator.github.io/downpayment.html">Down Payment Calculator</a>
+        <a href="/mortgagecalculator.github.io/blog.html">📝 Blog</a>
       </div>
     </div>
   </nav>
 
   <header class="hero">
-    <h1>Mortgage Calculator</h1>
-    <p>Clean, simple estimates with principal, interest, taxes, and insurance.</p>
+    <h1>💰 Mortgage Calculator</h1>
+    <p>Estimate your monthly mortgage payment including taxes and insurance</p>
   </header>
 
-  <main class="grid">
-    <section class="card" aria-labelledby="inputs">
-      <h2 id="inputs">Loan Details</h2>
-      <div class="sub">Enter your scenario to estimate monthly payment.</div>
+  <section class="grid">
+    <!-- Left: inputs -->
+    <div class="left card">
+      <h2>📝 Loan Details</h2>
       <form id="mortgageForm">
         <div class="row">
           <div>
-            <label for="homePrice">Home price</label>
-            <input type="number" id="homePrice" value="450000" min="0" />
+            <label for="homePrice">Home Price</label>
+            <div class="inline-suffix"><input id="homePrice" type="number" value="300000" min="0" step="1000" /><span>$</span></div>
           </div>
           <div>
-            <label for="downPayment">Down payment (%)</label>
-            <input type="number" id="downPayment" value="20" min="0" max="100" />
+            <label for="downPayment">Down Payment</label>
+            <div class="inline-suffix"><input id="downPayment" type="number" value="60000" min="0" step="500" /><span>$</span></div>
           </div>
           <div>
-            <label for="rate">Interest rate (APR %)</label>
-            <input type="number" id="rate" value="6.75" step="0.01" min="0" />
+            <label for="termYears">Loan Term (Years)</label>
+            <div class="inline-suffix"><input id="termYears" type="number" value="30" min="1" max="50" step="1" /><span>yrs</span></div>
           </div>
           <div>
-            <label for="term">Loan term</label>
-            <select id="term">
-              <option value="30" selected>30 years</option>
-              <option value="20">20 years</option>
-              <option value="15">15 years</option>
-              <option value="10">10 years</option>
-            </select>
+            <label for="rate">Interest Rate</label>
+            <div class="inline-suffix"><input id="rate" type="number" value="6.5" min="0" step="0.01" /><span>%</span></div>
           </div>
           <div>
-            <label for="tax">Property tax (annual $)</label>
-            <input type="number" id="tax" value="4500" min="0" />
-            <div class="hint">Estimate or set to 0</div>
+            <label for="taxAnnual">Property Tax (Annual)</label>
+            <div class="inline-suffix"><input id="taxAnnual" type="number" value="3600" min="0" step="50" /><span>$</span></div>
           </div>
           <div>
-            <label for="ins">Home insurance (annual $)</label>
-            <input type="number" id="ins" value="1500" min="0" />
+            <label for="insAnnual">Home Insurance (Annual)</label>
+            <div class="inline-suffix"><input id="insAnnual" type="number" value="1200" min="0" step="25" /><span>$</span></div>
+          </div>
+          <div>
+            <label for="pmiMonthly">PMI (Monthly)</label>
+            <div class="inline-suffix"><input id="pmiMonthly" type="number" value="0" min="0" step="1" /><span>$</span></div>
+          </div>
+          <div>
+            <label for="hoaMonthly">HOA (Monthly)</label>
+            <div class="inline-suffix"><input id="hoaMonthly" type="number" value="0" min="0" step="1" /><span>$</span></div>
           </div>
         </div>
+        <div class="actions">
+          <button type="button" id="calcBtn" class="btn">💰 Calculate</button>
+          <button type="button" id="resetBtn" class="btn secondary">🔄 Reset</button>
+        </div>
       </form>
-    </section>
+    </div>
 
-    <section class="card" aria-labelledby="results">
-      <h2 id="results">Results</h2>
-      <div class="kpis" id="kpis">
-        <div class="kpi"><div class="label">Monthly payment</div><div class="value" id="totalMonthly">$0</div></div>
-        <div class="kpi"><div class="label">Principal & Interest</div><div class="value" id="pi">$0</div></div>
-        <div class="kpi"><div class="label">Taxes & Insurance</div><div class="value" id="ti">$0</div></div>
-      </div>
+    <!-- Right: results -->
+    <div class="right card">
+      <h2>📊 Monthly Payment Breakdown</h2>
+      <div class="stat"><div class="label">Principal & Interest</div><div class="value" id="pi">$0</div></div>
+      <div class="stat"><div class="label">Property Tax</div><div class="value" id="ti">$0</div></div>
+      <div class="stat"><div class="label">Home Insurance</div><div class="value" id="hi">$0</div></div>
+      <div class="stat"><div class="label">PMI</div><div class="value" id="pmi">$0</div></div>
+      <div class="stat"><div class="label">HOA</div><div class="value" id="hoa">$0</div></div>
+      <div class="stat" style="border-style:solid"><div class="label">Total Monthly Payment</div><div class="value" id="totalMonthly">$0</div></div>
       <div class="chart-wrap">
-        <canvas id="breakdownChart" width="460" height="460" aria-label="Payment breakdown chart" role="img"></canvas>
+        <canvas id="breakdownChart" height="180"></canvas>
       </div>
-      <div class="note">Chart shows monthly share of principal & interest, taxes, and insurance. Percent labels included.</div>
-    </section>
-  </main>
+      <div class="disclaimer">*Estimates only. Consult a lender for accurate figures.</div>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    function fmt(n){return n.toLocaleString(undefined,{maximumFractionDigits:0})}
+    const $ = (id) => document.getElementById(id);
+    const fmt = (n) => (isFinite(n)? n:0).toLocaleString(undefined,{maximumFractionDigits:0});
+
     function calc(){
-      const price = +document.getElementById('homePrice').value||0;
-      const dpct = Math.min(100,Math.max(0,+document.getElementById('downPayment').value||0));
-      const rate = (+document.getElementById('rate').value||0)/100;
-      const termY = +document.getElementById('term').value||30;
-      const taxA = +document.getElementById('tax').value||0;
-      const insA = +document.getElementById('ins').value||0;
+      const price = parseFloat($("homePrice").value)||0;
+      const down = parseFloat($("downPayment").value)||0;
+      const termY = Math.max(1, parseFloat($("termYears").value)||0);
+      const rate = Math.max(0, parseFloat($("rate").value)||0)/100;
+      const taxA = Math.max(0, parseFloat($("taxAnnual").value)||0);
+      const insA = Math.max(0, parseFloat($("insAnnual").value)||0);
+      const pmiM = Math.max(0, parseFloat($("pmiMonthly").value)||0);
+      const hoaM = Math.max(0, parseFloat($("hoaMonthly").value)||0);
 
-      const down = price*dpct/100;
       const loan = Math.max(0, price - down);
-      const n = termY*12;
+      const n = termY * 12;
       const r = rate/12;
-      const pi = r===0? (loan/n) : (loan*r)/(1-Math.pow(1+r,-n));
-      const ti = (taxA+insA)/12;
-      const total = pi + ti;
+      let pi = 0;
+      if (loan>0 && r>0){
+        pi = loan * (r*Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+      } else if (loan>0 && r===0){
+        pi = loan / n;
+      }
+      const ti = taxA/12;
+      const hi = insA/12;
+      const total = pi + ti + hi + pmiM + hoaM;
 
-      document.getElementById('totalMonthly').textContent = `$${fmt(total)}`;
-      document.getElementById('pi').textContent = `$${fmt(pi)}`;
-      document.getElementById('ti').textContent = `$${fmt(ti)}`;
+      $("totalMonthly").textContent = `$${fmt(total)}`;
+      $("pi").textContent = `$${fmt(pi)}`;
+      $("ti").textContent = `$${fmt(ti)}`;
+      $("hi").textContent = `$${fmt(hi)}`;
+      $("pmi").textContent = `$${fmt(pmiM)}`;
+      $("hoa").textContent = `$${fmt(hoaM)}`;
 
-      const data = [pi, (taxA/12), (insA/12)];
-      const labels = ['Principal & Interest','Taxes','Insurance'];
+      const data = [pi, ti, hi, pmiM, hoaM];
+      const labels = ['Principal & Interest','Taxes','Insurance','PMI','HOA'];
       const totalParts = data.reduce((a,b)=>a+b,0) || 1;
       const perc = data.map(v=> Math.round(v*100/totalParts));
 
@@ -178,42 +197,18 @@
         const ctx = document.getElementById('breakdownChart').getContext('2d');
         window._chart = new Chart(ctx, {
           type: 'pie',
-          data: { labels, datasets:[{ data, backgroundColor:['#2563eb','#64748b','#f59e0b'], borderColor:'#fff', borderWidth:2 }] },
-          options: {
-            plugins:{
-              legend:{ position:'bottom', labels:{ color:'#111827', boxWidth:14 } },
-              tooltip:{ callbacks:{ label: (c)=> `${c.label}: $${fmt(c.raw)} (${perc[c.dataIndex]}%)` } },
-              datalabels: false
-            }
-          }
+          data: { labels, datasets:[{ data, backgroundColor:['#2563eb','#64748b','#f59e0b','#10b981','#ef4444'], borderColor:'#fff', borderWidth:2 }] },
+          options: { plugins:{ legend:{ position:'bottom', labels:{ color:'#111827', boxWidth:14 } }, tooltip:{ callbacks:{ label: (c)=> `${c.label}: $${fmt(c.raw)} (${perc[c.dataIndex]}%)` } } } }
         });
       } else {
         window._chart.data.datasets[0].data = data;
         window._chart.data.labels = labels;
         window._chart.update();
       }
-
-      // Draw centered percent labels manually
-      setTimeout(()=>{
-        const chart = window._chart;
-        const ctx = chart.ctx;
-        chart.draw();
-        const meta = chart.getDatasetMeta(0);
-        ctx.save();
-        ctx.fillStyle = '#0f172a';
-        ctx.font = '600 12px Inter, sans-serif';
-        data.forEach((v,i)=>{
-          const p = perc[i];
-          if(p<=0) return;
-          const { x, y } = meta.data[i].getProps(['x','y'], true);
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(p+'%', x, y);
-        });
-        ctx.restore();
-      }, 0);
     }
 
+    document.getElementById('calcBtn').addEventListener('click', calc);
+    document.getElementById('resetBtn').addEventListener('click', ()=>{ document.getElementById('mortgageForm').reset(); calc(); });
     document.getElementById('mortgageForm').addEventListener('input', calc);
     window.addEventListener('DOMContentLoaded', calc);
   </script>
