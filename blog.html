@@ -4,137 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Mortgage Calculator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 1rem 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        nav a:hover {
-            background: #34495e;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .blog-posts {
-            padding: 4rem 0;
-        }
-
-        .blog-post {
-            background: white;
-            margin-bottom: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .post-header {
-            padding: 2rem;
-            background: #f8f9fa;
-            border-bottom: 1px solid #eee;
-        }
-
-        .post-title {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-
-        .post-meta {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .post-content {
-            padding: 2rem;
-        }
-
-        .post-content h3 {
-            color: #2c3e50;
-            margin: 1.5rem 0 1rem;
-        }
-
-        .post-content p {
-            margin-bottom: 1rem;
-        }
-
-        .post-content ul {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .post-title {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -142,9 +12,9 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#mortgage-calculator">Mortgage Calculator</a></li>
-                    <li><a href="index.html#loan-calculator">Loan Calculator</a></li>
-                    <li><a href="index.html#down-payment">Down Payment Calculator</a></li>
+                    <li><a href="mortgage.html">Mortgage Calculator</a></li>
+                    <li><a href="loan.html">Loan Calculator</a></li>
+                    <li><a href="downpayment.html">Down Payment Calculator</a></li>
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
@@ -170,22 +40,34 @@
                     </div>
                 </div>
                 <div class="post-content">
-                    <p>Getting a mortgage is one of the most significant financial decisions you'll make in your lifetime. Unfortunately, many first-time homebuyers make costly mistakes that could have been easily avoided with proper preparation and knowledge.</p>
+                    <p>
+                        Getting a mortgage is one of the most significant financial decisions you'll make in your lifetime. Unfortunately, many first-time homebuyers make costly mistakes that could have been easily avoided with proper preparation and knowledge.
+                    </p>
                     
                     <h3>1. Not Shopping Around for Rates</h3>
-                    <p>One of the biggest mistakes is accepting the first mortgage offer you receive. Even a difference of 0.25% in interest rates can cost you thousands over the life of your loan. Always compare offers from at least 3-4 different lenders, including banks, credit unions, and online lenders.</p>
+                    <p>
+                        One of the biggest mistakes is accepting the first mortgage offer you receive. Even a difference of 0.25% in interest rates can cost you thousands over the life of your loan. Always compare offers from at least 3-4 different lenders, including banks, credit unions, and online lenders.
+                    </p>
                     
                     <h3>2. Ignoring Your Credit Score</h3>
-                    <p>Your credit score directly impacts your mortgage rate and terms. Before applying for a mortgage, check your credit report and work on improving your score if needed. Pay down existing debts, don't open new credit accounts, and ensure all bills are paid on time.</p>
+                    <p>
+                        Your credit score directly impacts your mortgage rate and terms. Before applying for a mortgage, check your credit report and work on improving your score if needed. Pay down existing debts, don't open new credit accounts, and ensure all bills are paid on time.
+                    </p>
                     
                     <h3>3. Making a Too-Small Down Payment</h3>
-                    <p>While some loans allow down payments as low as 3%, putting down less than 20% typically means you'll pay private mortgage insurance (PMI). If possible, save for a larger down payment to avoid PMI and secure better loan terms.</p>
+                    <p>
+                        While some loans allow down payments as low as 3%, putting down less than 20% typically means you'll pay private mortgage insurance (PMI). If possible, save for a larger down payment to avoid PMI and secure better loan terms.
+                    </p>
                     
                     <h3>4. Overlooking Additional Costs</h3>
-                    <p>Don't forget about closing costs, property taxes, homeowners insurance, and maintenance expenses. These can add up to thousands of dollars annually and should be factored into your budget from the start.</p>
+                    <p>
+                        Don't forget about closing costs, property taxes, homeowners insurance, and maintenance expenses. These can add up to thousands of dollars annually and should be factored into your budget from the start.
+                    </p>
                     
                     <h3>5. Getting Pre-Qualified Instead of Pre-Approved</h3>
-                    <p>Pre-qualification is just an estimate, while pre-approval involves a thorough review of your finances. A pre-approval letter shows sellers you're a serious buyer and can give you an edge in competitive markets.</p>
+                    <p>
+                        Pre-qualification is just an estimate, while pre-approval involves a thorough review of your finances. A pre-approval letter shows sellers you're a serious buyer and can give you an edge in competitive markets.
+                    </p>
                 </div>
             </article>
 
@@ -198,28 +80,44 @@
                     </div>
                 </div>
                 <div class="post-content">
-                    <p>Buying your first home is an exciting milestone, but it requires careful planning and preparation. Here's a comprehensive guide to help you navigate the home buying process successfully.</p>
+                    <p>
+                        Buying your first home is an exciting milestone, but it requires careful planning and preparation. Here's a comprehensive guide to help you navigate the home buying process successfully.
+                    </p>
                     
                     <h3>Step 1: Assess Your Financial Situation</h3>
-                    <p>Before you start house hunting, take a honest look at your finances. Calculate your monthly income, expenses, and existing debts. A good rule of thumb is that your total housing costs shouldn't exceed 28% of your gross monthly income.</p>
+                    <p>
+                        Before you start house hunting, take a honest look at your finances. Calculate your monthly income, expenses, and existing debts. A good rule of thumb is that your total housing costs shouldn't exceed 28% of your gross monthly income.
+                    </p>
                     
                     <h3>Step 2: Save for a Down Payment and Emergency Fund</h3>
-                    <p>Start saving early for your down payment. While you can put down as little as 3% with some loans, a larger down payment will save you money in the long run. Also maintain an emergency fund of 3-6 months of expenses separate from your down payment savings.</p>
+                    <p>
+                        Start saving early for your down payment. While you can put down as little as 3% with some loans, a larger down payment will save you money in the long run. Also maintain an emergency fund of 3-6 months of expenses separate from your down payment savings.
+                    </p>
                     
                     <h3>Step 3: Check and Improve Your Credit Score</h3>
-                    <p>Your credit score affects your mortgage rate significantly. Scores of 740 and above typically qualify for the best rates. If your score needs improvement, focus on paying bills on time and reducing credit card balances.</p>
+                    <p>
+                        Your credit score affects your mortgage rate significantly. Scores of 740 and above typically qualify for the best rates. If your score needs improvement, focus on paying bills on time and reducing credit card balances.
+                    </p>
                     
                     <h3>Step 4: Get Pre-Approved for a Mortgage</h3>
-                    <p>Shop around with multiple lenders to compare rates and terms. Getting pre-approved will give you a clear picture of how much you can borrow and shows sellers you're a serious buyer.</p>
+                    <p>
+                        Shop around with multiple lenders to compare rates and terms. Getting pre-approved will give you a clear picture of how much you can borrow and shows sellers you're a serious buyer.
+                    </p>
                     
                     <h3>Step 5: Find the Right Real Estate Agent</h3>
-                    <p>Choose an agent who knows your target area well and has experience working with first-time buyers. They should be patient, communicative, and willing to educate you throughout the process.</p>
+                    <p>
+                        Choose an agent who knows your target area well and has experience working with first-time buyers. They should be patient, communicative, and willing to educate you throughout the process.
+                    </p>
                     
                     <h3>Step 6: Start House Hunting</h3>
-                    <p>Make a list of your must-haves versus nice-to-haves. Consider factors like location, school districts, commute times, and future resale value. Don't fall in love with the first house you see – take time to explore your options.</p>
+                    <p>
+                        Make a list of your must-haves versus nice-to-haves. Consider factors like location, school districts, commute times, and future resale value. Don't fall in love with the first house you see – take time to explore your options.
+                    </p>
                     
                     <h3>Step 7: Make an Offer and Close</h3>
-                    <p>When you find the right home, work with your agent to make a competitive offer. Once accepted, you'll need a home inspection, finalize your mortgage, and handle the closing process.</p>
+                    <p>
+                        When you find the right home, work with your agent to make a competitive offer. Once accepted, you'll need a home inspection, finalize your mortgage, and handle the closing process.
+                    </p>
                 </div>
             </article>
 
@@ -232,12 +130,16 @@
                     </div>
                 </div>
                 <div class="post-content">
-                    <p>Choosing between a fixed-rate and adjustable-rate mortgage (ARM) is one of the most important decisions you'll make when financing your home. Each option has distinct advantages and disadvantages depending on your financial situation and long-term plans.</p>
+                    <p>
+                        Choosing between a fixed-rate and adjustable-rate mortgage (ARM) is one of the most important decisions you'll make when financing your home. Each option has distinct advantages and disadvantages depending on your financial situation and long-term plans.
+                    </p>
                     
                     <h3>Fixed-Rate Mortgages: Stability and Predictability</h3>
-                    <p>With a fixed-rate mortgage, your interest rate remains constant throughout the entire loan term, typically 15 or 30 years. This means your principal and interest payment will never change, making budgeting easier and providing protection against rising interest rates.</p>
+                    <p>
+                        With a fixed-rate mortgage, your interest rate remains constant throughout the entire loan term, typically 15 or 30 years. This means your principal and interest payment will never change, making budgeting easier and providing protection against rising interest rates.
+                    </p>
                     
-                    <p><strong>Advantages of Fixed-Rate Mortgages:</strong></p>
+                    <h3>Advantages of Fixed-Rate Mortgages:</h3>
                     <ul>
                         <li>Predictable monthly payments</li>
                         <li>Protection from interest rate increases</li>
@@ -245,7 +147,7 @@
                         <li>Peace of mind for risk-averse borrowers</li>
                     </ul>
                     
-                    <p><strong>Disadvantages:</strong></p>
+                    <h3>Disadvantages:</h3>
                     <ul>
                         <li>Higher initial rates compared to ARMs</li>
                         <li>No benefit if interest rates decrease</li>
@@ -253,9 +155,11 @@
                     </ul>
                     
                     <h3>Adjustable-Rate Mortgages: Lower Initial Rates with Risk</h3>
-                    <p>ARMs typically start with a lower interest rate for an initial period (usually 3, 5, 7, or 10 years), after which the rate adjusts periodically based on market conditions. The initial lower rate can result in significant savings during the fixed period.</p>
+                    <p>
+                        ARMs typically start with a lower interest rate for an initial period (usually 3, 5, 7, or 10 years), after which the rate adjusts periodically based on market conditions. The initial lower rate can result in significant savings during the fixed period.
+                    </p>
                     
-                    <p><strong>Advantages of Adjustable-Rate Mortgages:</strong></p>
+                    <h3>Advantages of Adjustable-Rate Mortgages:</h3>
                     <ul>
                         <li>Lower initial interest rates and payments</li>
                         <li>Potential for rates to decrease over time</li>
@@ -263,7 +167,7 @@
                         <li>More money available for other investments initially</li>
                     </ul>
                     
-                    <p><strong>Disadvantages:</strong></p>
+                    <h3>Disadvantages:</h3>
                     <ul>
                         <li>Payment uncertainty after the initial period</li>
                         <li>Risk of significantly higher payments</li>
@@ -288,7 +192,9 @@
                         <li>You expect interest rates to decrease or remain stable</li>
                     </ul>
                     
-                    <p>Ultimately, the choice between fixed and adjustable-rate mortgages depends on your personal financial situation, risk tolerance, and long-term plans. Consider consulting with a mortgage professional to determine which option aligns best with your goals.</p>
+                    <p>
+                        Ultimately, the choice between fixed and adjustable-rate mortgages depends on your personal financial situation, risk tolerance, and long-term plans. Consider consulting with a mortgage professional to determine which option aligns best with your goals.
+                    </p>
                 </div>
             </article>
 
