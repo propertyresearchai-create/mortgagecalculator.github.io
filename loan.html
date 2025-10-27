@@ -90,11 +90,11 @@
       align-items: start;
     }
     .calculator-grid > .card:first-child {
-      flex: 0 0 30%;
+      flex: 0 0 50%;
       min-width: 250px;
     }
     .calculator-grid > .card:last-child {
-      flex: 1;
+      flex: 0 0 50%;
     }
     @media (max-width: 960px) {
       .calculator-grid {
@@ -212,10 +212,10 @@
     <div class="nav-content">
       <div class="nav-logo">💼 Property Calculator Hub</div>
       <ul class="nav-menu">
-        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
-        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
-        <li><a class="nav-link active" href="loan.html">Loan Calculator</a></li>
-        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
+        <li><a href="loan.html" class="nav-link active">Loan Calculator</a></li>
+        <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
       </ul>
     </div>
   </nav>
@@ -228,15 +228,15 @@
         <form id="loanForm">
           <div class="form-group">
             <label for="loanAmount">Loan Amount ($)</label>
-            <input type="number" id="loanAmount" value="50000" min="0" step="100">
+            <input type="number" id="loanAmount" value="50000" min="0" step="100" />
           </div>
           <div class="form-group">
             <label for="interestRate">Annual Interest Rate (%)</label>
-            <input type="number" id="interestRate" value="5" min="0" step="0.01">
+            <input type="number" id="interestRate" value="5" min="0" step="0.01" />
           </div>
           <div class="form-group">
             <label for="loanTerm">Loan Term (years)</label>
-            <input type="number" id="loanTerm" value="5" min="1" step="1">
+            <input type="number" id="loanTerm" value="5" min="1" step="1" />
           </div>
           <div class="form-group">
             <label for="paymentFrequency">Payment Frequency</label>
@@ -270,7 +270,7 @@
           </div>
         </div>
         <div class="disclaimer">
-          <strong>Disclaimer:</strong>
+          <strong>Disclaimer:</strong><br>
           This loan calculator provides estimates for informational purposes only. Actual loan terms, interest rates, and payments may vary based on lender requirements, credit score, and other factors. Always consult with a financial advisor or loan officer for accurate loan information and personalized advice.
         </div>
       </div>
@@ -281,18 +281,22 @@
     window.addEventListener('DOMContentLoaded', () => {
       calculateLoan();
     });
+
     document.getElementById('loanForm').addEventListener('submit', function(e) {
       e.preventDefault();
       calculateLoan();
     });
+
     function calculateLoan() {
       const loanAmount = parseFloat(document.getElementById('loanAmount').value);
       const annualRate = parseFloat(document.getElementById('interestRate').value);
       const years = parseFloat(document.getElementById('loanTerm').value);
       const frequency = parseFloat(document.getElementById('paymentFrequency').value);
+
       // Convert annual rate to period rate
       const periodRate = (annualRate / 100) / frequency;
       const numPayments = years * frequency;
+
       // Calculate payment using loan formula
       let payment;
       if (periodRate === 0) {
@@ -300,13 +304,16 @@
       } else {
         payment = loanAmount * (periodRate * Math.pow(1 + periodRate, numPayments)) / (Math.pow(1 + periodRate, numPayments) - 1);
       }
+
       const totalPaid = payment * numPayments;
       const totalInterest = totalPaid - loanAmount;
+
       // Display results
       document.getElementById('monthlyPayment').textContent = '$' + payment.toFixed(2);
       document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2);
       document.getElementById('totalPaid').textContent = '$' + totalPaid.toFixed(2);
     }
+
     function resetForm() {
       document.getElementById('loanAmount').value = '50000';
       document.getElementById('interestRate').value = '5';
