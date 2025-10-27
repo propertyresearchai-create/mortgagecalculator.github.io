@@ -1,115 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator - Property Calculator Hub</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage Calculator - Property Calculator Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root { --brand:#0a3d62; --brand-2:#145a86; --bg:#f6f8fb; --card:#ffffff; --text:#1f2d3d; --muted:#6b7c93; --shadow:0 6px 18px rgba(16,24,40,.08); --radius:12px; }
+    body{background:var(--bg);color:var(--text);line-height:1.5;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .top-navigation{position:sticky;top:0;z-index:10;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:var(--shadow)}
+    .nav-content{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{font-weight:700;letter-spacing:.3px}
+    .nav-menu{display:flex;gap:14px;list-style:none;padding:0;margin:0}
+    .nav-link{color:#e6f0ff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    .nav-link.active,.nav-link:hover{background:rgba(255,255,255,.14);color:#fff}
+    .container{max-width:1100px;margin:28px auto;padding:0 16px}
+    h1{font-size:1.75rem;margin:16px 0 6px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .calculator-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+    @media (max-width:900px){.calculator-grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .card h2{margin:0 0 8px;font-size:1.2rem}
+    form{display:grid;gap:14px}
+    .row{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .col-6{grid-column:span 6}.col-12{grid-column:span 12}
+    @media (max-width:640px){.col-6{grid-column:span 12}}
+    .form-group{display:flex;flex-direction:column;gap:6px}
+    label{font-weight:600;color:#0f1f33;font-size:.95rem}
+    .field{display:flex;gap:10px;align-items:center}
+    input[type=number]{appearance:textfield;width:100%;padding:10px 12px;border:1px solid #d6dee6;border-radius:10px;font-size:1rem;outline:none;transition:border-color .15s,box-shadow .15s}
+    input[type=number]:focus{border-color:var(--brand-2);box-shadow:0 0 0 3px rgba(20,90,134,.12)}
+    .suffix{color:var(--muted);font-weight:600}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+    .btn{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:600}
+    .btn-primary{background:var(--brand-2);color:#fff}.btn-primary:hover{background:#0e4c70}
+    .btn-secondary{background:#eef3f8;color:#0f1f33}.btn-secondary:hover{background:#e3edf6}
+    .results{display:grid;gap:10px}
+    .result-item{display:flex;justify-content:space-between;padding:10px 12px;border:1px dashed #e3e8ef;border-radius:8px}
+    .result-item.total{border-style:solid;border-color:#d6dee6;background:#f8fbff;font-weight:700}
+    .result-label{color:var(--muted)}
+    .result-value{font-variant-numeric:tabular-nums}
+    .disclaimer{color:var(--muted);font-size:.9rem;margin-top:10px}
+    canvas{max-width:100%;height:auto}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="top-navigation">
-            <div class="nav-content">
-                <div class="nav-logo">
-                    <h2>Property Calculator Hub</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
-                    <li><a href="mortgage.html" class="nav-link active">Mortgage Calculator</a></li>
-                    <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
-                    <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <h1>Mortgage Calculator</h1>
-        
-        <div class="calculator-grid">
-            <div class="card">
-                <form id="mortgageForm" onsubmit="event.preventDefault(); calculateMortgage(); drawPieChart();">
-                    <div class="form-group">
-                        <label for="homePrice">Home Price</label>
-                        <input type="number" id="homePrice" value="320000" min="0" step="1000">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="downPayment">Down Payment</label>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="number" id="downPayment" value="64000" min="0" step="1000" style="flex: 1;">
-                            <input type="number" id="downPaymentPercent" value="20" min="0" max="100" style="width: 80px;">
-                            <span>%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="interestRate">Interest Rate (%)</label>
-                        <input type="number" id="interestRate" value="6.5" min="0" step="0.01">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="loanTerm">Loan Term (Years)</label>
-                        <input type="number" id="loanTerm" value="30" min="1" max="50">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="propertyTax">Annual Property Tax</label>
-                        <input type="number" id="propertyTax" value="3200" min="0" step="100">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="homeInsurance">Annual Home Insurance</label>
-                        <input type="number" id="homeInsurance" value="1600" min="0" step="100">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="pmi">PMI (Monthly)</label>
-                        <input type="number" id="pmi" value="0" min="0" step="10">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="hoa">HOA Fees (Monthly)</label>
-                        <input type="number" id="hoa" value="0" min="0" step="10">
-                    </div>
-                    
-                    <button type="submit">Calculate</button>
-                </form>
-            </div>
-            
-            <div class="card">
-                <h2>Monthly Payment Breakdown</h2>
-                <div id="results">
-                    <div class="result-item">
-                        <span class="result-label">Principal & Interest:</span>
-                        <span class="result-value" id="principalInterest">$0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Property Tax:</span>
-                        <span class="result-value" id="monthlyTax">$0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Home Insurance:</span>
-                        <span class="result-value" id="monthlyInsurance">$0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">PMI:</span>
-                        <span class="result-value" id="monthlyPMI">$0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">HOA:</span>
-                        <span class="result-value" id="monthlyHOA">$0</span>
-                    </div>
-                    <hr>
-                    <div class="result-item total">
-                        <span class="result-label">Total Monthly Payment:</span>
-                        <span class="result-value" id="totalPayment">$0</span>
-                    </div>
-                </div>
-                
-                <canvas id="pieChart" width="300" height="300"></canvas>
-            </div>
-        </div>
+  <nav class="top-navigation">
+    <div class="nav-content">
+      <div class="nav-logo">Property Calculator Hub</div>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link active" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
+      </ul>
     </div>
-    
-    <script src="mortgage.js"></script>
+  </nav>
+
+  <div class="container">
+    <h1>Mortgage Calculator</h1>
+    <p class="subtitle">Estimate your monthly payment with principal and interest, taxes, insurance, PMI, and HOA.</p>
+
+    <div class="calculator-grid">
+      <div class="card">
+        <h2>Inputs</h2>
+        <form id="mortgageForm" onsubmit="event.preventDefault(); calculateMortgage(); drawPieChart();">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="homePrice">Home Price</label>
+                <input class="field" id="homePrice" type="number" min="0" step="1000" value="320000" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="downPayment">Down Payment</label>
+                <div class="field">
+                  <input id="downPayment" type="number" min="0" step="1000" value="64000" />
+                  <input id="downPaymentPercent" type="number" min="0" max="100" step="0.1" value="20" style="max-width:90px;" />
+                  <span class="suffix">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="interestRate">Interest Rate (%)</label>
+                <input id="interestRate" type="number" min="0" step="0.01" value="6.5" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="loanTerm">Loan Term (Years)</label>
+                <input id="loanTerm" type="number" min="1" max="50" value="30" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="propertyTax">Annual Property Tax</label>
+                <input id="propertyTax" type="number" min="0" step="100" value="3200" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="homeInsurance">Annual Home Insurance</label>
+                <input id="homeInsurance" type="number" min="0" step="100" value="1600" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="pmi">PMI (Monthly)</label>
+                <input id="pmi" type="number" min="0" step="10" value="0" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="hoa">HOA Fees (Monthly)</label>
+                <input id="hoa" type="number" min="0" step="10" value="0" />
+              </div>
+            </div>
+            <div class="col-12 actions">
+              <button class="btn btn-primary" type="submit">Calculate</button>
+              <button class="btn btn-secondary" type="button" onclick="resetForm()">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Monthly Payment Breakdown</h2>
+        <div class="results">
+          <div class="result-item"><span class="result-label">Principal & Interest:</span><span class="result-value" id="principalInterest">$0</span></div>
+          <div class="result-item"><span class="result-label">Property Tax:</span><span class="result-value" id="monthlyTax">$0</span></div>
+          <div class="result-item"><span class="result-label">Home Insurance:</span><span class="result-value" id="monthlyInsurance">$0</span></div>
+          <div class="result-item"><span class="result-label">PMI:</span><span class="result-value" id="monthlyPMI">$0</span></div>
+          <div class="result-item"><span class="result-label">HOA:</span><span class="result-value" id="monthlyHOA">$0</span></div>
+          <div class="result-item total"><span class="result-label">Total Monthly Payment:</span><span class="result-value" id="totalPayment">$0</span></div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-top:12px;"><canvas id="pieChart" width="300" height="300"></canvas></div>
+        <p class="disclaimer">Estimates are for educational purposes only and are not a commitment to lend. Rates, terms, and costs may vary. Verify figures with your lender.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toCurrency(n){return n.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:0});}
+    function calculateMortgage(){
+      const price=Number(document.getElementById('homePrice').value||0);
+      const downAmtInput=Number(document.getElementById('downPayment').value||0);
+      const downPctInput=Number(document.getElementById('downPaymentPercent').value||0);
+      let downPayment=downAmtInput;
+      if(downPctInput>0&&price>0){downPayment=Math.round((downPctInput/100)*price);document.getElementById('downPayment').value=String(downPayment);} else if(price>0&&downAmtInput>0){const pct=Math.min(100,(downAmtInput/price)*100);document.getElementById('downPaymentPercent').value=pct.toFixed(1);} 
+      const principal=Math.max(0,price-downPayment);
+      const annualRate=Number(document.getElementById('interestRate').value||0)/100;
+      const years=Number(document.getElementById('loanTerm').value||0);
+      const n=years*12; const r=annualRate/12; let monthlyPI=0;
+      if(r===0){monthlyPI=n>0?principal/n:0;} else {const pow=Math.pow(1+r,n); monthlyPI=principal>0?principal*((r*pow)/(pow-1)):0;}
+      const monthlyTax=Number(document.getElementById('propertyTax').value||0)/12;
+      const monthlyInsurance=Number(document.getElementById('homeInsurance').value||0)/12;
+      const monthlyPMI=Number(document.getElementById('pmi').value||0);
+      const monthlyHOA=Number(document.getElementById('hoa').value||0);
+      const total=monthlyPI+monthlyTax+monthlyInsurance+monthlyPMI+monthlyHOA;
+      document.getElementById('principalInterest').textContent=toCurrency(monthlyPI);
+      document.getElementById('monthlyTax').textContent=toCurrency(monthlyTax);
+      document.getElementById('monthlyInsurance').textContent=toCurrency(monthlyInsurance);
+      document.getElementById('monthlyPMI').textContent=toCurrency(monthlyPMI);
+      document.getElementById('monthlyHOA').textContent=toCurrency(monthlyHOA);
+      document.getElementById('totalPayment').textContent=toCurrency(total);
+    }
+    function resetForm(){
+      document.getElementById('mortgageForm').reset();
+      document.getElementById('homePrice').value=320000;
+      document.getElementById('downPayment').value=64000;
+      document.getElementById('downPaymentPercent').value=20;
+      document.getElementById('interestRate').value=6.5;
+      document.getElementById('loanTerm').value=30;
+      document.getElementById('propertyTax').value=3200;
+      document.getElementById('homeInsurance').value=1600;
+      document.getElementById('pmi').value=0;
+      document.getElementById('hoa').value=0;
+      for(const id of ['principalInterest','monthlyTax','monthlyInsurance','monthlyPMI','monthlyHOA','totalPayment']){document.getElementById(id).textContent='$0';}
+      drawPieChart(true);
+    }
+    function drawPieChart(clearOnly=false){
+      const canvas=document.getElementById('pieChart'); const ctx=canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height); if(clearOnly) return;
+      const vals=[
+        parseFloat((document.getElementById('principalInterest').textContent||'0').replace(/[^\d.]/g,''))||0,
+        parseFloat((document.getElementById('monthlyTax').textContent||'0').replace(/[^\d.]/g,''))||0,
+        parseFloat((document.getElementById('monthlyInsurance').textContent||'0').replace(/[^\d.]/g,''))||0,
+        parseFloat((document.getElementById('monthlyPMI').textContent||'0').replace(/[^\d.]/g,''))||0,
+        parseFloat((document.getElementById('monthlyHOA').textContent||'0').replace(/[^\d.]/g,''))||0
+      ];
+      const total=vals.reduce((a,b)=>a+b,0); if(total<=0) return;
+      const colors=['#145a86','#2ecc71','#f39c12','#9b59b6','#e74c3c'];
+      let start= -Math.PI/2; const cx=canvas.width/2, cy=canvas.height/2, r=Math.min(cx,cy)-8;
+      vals.forEach((v,i)=>{ const slice=(v/total)*Math.PI*2; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,start,start+slice); ctx.closePath(); ctx.fillStyle=colors[i%colors.length]; ctx.fill(); start+=slice; });
+    }
+  </script>
 </body>
 </html>
