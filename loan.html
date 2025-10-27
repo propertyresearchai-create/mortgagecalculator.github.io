@@ -4,23 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loan Calculator - Property Calculator Hub</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{--bg:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--card:#ffffff;--brand:#2563eb;--brand-700:#1d4ed8;--accent:#f59e0b;--chip:#f3f4f6}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{color:var(--brand-700);text-decoration:underline}
+    .top-nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50}
+    .top-nav .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700;color:#111827}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+    .menu{display:flex;gap:18px;flex-wrap:wrap}
+    .menu a{color:#111827;font-weight:600;padding:6px 8px;border-radius:6px}
+    .menu a.active{color:var(--brand)}
+    .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}
+    .hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}
+    .hero p{margin:0;color:var(--muted)}
+    /* Layout 40/60 split */
+    .container{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:40% 60%;gap:20px;align-items:start}
+    @media (max-width: 900px){.container{grid-template-columns:1fr}}
+    .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .panel .inner{padding:18px}
+    .panel h3{margin:0 0 12px;font-size:16px;color:#0f172a}
+    form .field{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
+    form .field:last-child{border-bottom:none}
+    form .label{font-size:15px;font-weight:500;color:#374151}
+    form input{width:110px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:15px}
+    form input:focus{outline:2px solid var(--brand);outline-offset:0}
+    .btnrow{margin-top:8px;display:flex;gap:10px}
+    button{cursor:pointer;background:var(--brand);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px;transition:background .2s}
+    button:hover{background:var(--brand-700)}
+    .output{line-height:1.7}
+    .output .row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--border)}
+    .output .row:last-child{border-bottom:none}
+    .output .lbl{font-weight:600;color:#374151}
+    .output .val{text-align:right;color:#0f172a;font-weight:700}
+    #chartContainer{margin-top:24px}
+  </style>
 </head>
 <body>
-  <nav class="top-navigation">
-    <div class="nav-content">
-      <div class="nav-logo">
+  <nav class="top-nav">
+    <div class="wrap">
+      <div class="brand">
+        <div class="dot"></div>
         Property Calculator Hub
       </div>
-      <ul class="nav-menu">
-        <a class="nav-link" href="index.html">🏠 Home</a>
-        <a class="nav-link" href="mortgage.html">Mortgage Calculator</a>
-        <a class="nav-link active" href="loan.html">Loan Calculator</a>
-        <a class="nav-link" href="downpayment.html">Down Payment Calculator</a>
-      </ul>
+      <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="mortgage.html">Mortgage Calculator</a>
+        <a href="loan.html" class="active">Loan Calculator</a>
+        <a href="downpayment.html">Down Payment Calculator</a>
+      </div>
     </div>
   </nav>
-
+  <div class="hero">
+    <h1>Loan Calculator</h1>
+    <p>Calculate your monthly loan payment and total interest</p>
+  </div>
   <div class="container">
     <!-- LOAN CALCULATOR FORM -->
     <div class="panel">
@@ -45,8 +89,6 @@
         </form>
       </div>
     </div>
-
-    <!-- LOAN RESULTS -->
     <div class="panel">
       <div class="inner">
         <h3>Loan Results</h3>
@@ -60,7 +102,6 @@
       </div>
     </div>
   </div>
-
   <script src="loan.js"></script>
 </body>
 </html>
