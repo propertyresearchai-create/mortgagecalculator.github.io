@@ -1,81 +1,108 @@
+let myChart = null;
+
 function calculateLoan() {
-    const loanAmount = parseFloat(document.getElementById('loanAmountInput').value);
-    const years = parseInt(document.getElementById('loanTermYears').value) || 0;
-    const months = parseInt(document.getElementById('loanTermMonths').value) || 0;
-    const loanTerm = years * 12 + months;
-    const interestRate = parseFloat(document.getElementById('loanInterestRate').value) / 100 / 12;
+    const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+    const years = parseInt(document.getElementById('years').value);
+    const periods = years * 12;
     
-    if (isNaN(loanAmount) || isNaN(loanTerm) || isNaN(interestRate) || loanTerm === 0) {
+    if (isNaN(principal) || isNaN(rate) || isNaN(years) || periods === 0) {
         return;
     }
     
-    const monthlyPayment = loanAmount * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
-    const totalPayment = monthlyPayment * loanTerm;
-    const totalInterest = totalPayment - loanAmount;
+    const monthlyPayment = principal * (rate * Math.pow(1 + rate, periods)) / (Math.pow(1 + rate, periods) - 1);
+    const totalPayment = monthlyPayment * periods;
+    const totalInterest = totalPayment - principal;
     
-    document.getElementById('loanPayment').textContent = '$' + monthlyPayment.toFixed(2);
-    document.getElementById('totalPayments').textContent = '$' + totalPayment.toFixed(2);
-    document.getElementById('loanTotalInterest').textContent = '$' + totalInterest.toFixed(2);
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `
+        <div class="row">
+            <span class="k">Monthly Payment:</span>
+            <span class="v">$${monthlyPayment.toFixed(2)}</span>
+        </div>
+        <div class="row">
+            <span class="k">Total Payments:</span>
+            <span class="v">$${totalPayment.toFixed(2)}</span>
+        </div>
+        <div class="highlight">
+            <div class="row">
+                <span class="k">Total Interest Paid:</span>
+                <span class="v">$${totalInterest.toFixed(2)}</span>
+            </div>
+        </div>
+    `;
     
-    document.getElementById('loanSummaryAmount').textContent = '$' + loanAmount.toFixed(2);
-    document.getElementById('loanSummaryRate').textContent = (interestRate * 12 * 100).toFixed(2) + '%';
-    document.getElementById('loanSummaryTerm').textContent = years + ' years' + (months > 0 ? ' ' + months + ' months' : '');
-    document.getElementById('loanSummaryPayments').textContent = loanTerm;
-    document.getElementById('loanSummaryTotalInterest').textContent = '$' + totalInterest.toFixed(2);
-    
-    const today = new Date();
-    const payoffDate = new Date(today.getFullYear(), today.getMonth() + loanTerm, today.getDate());
-    const months_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    document.getElementById('loanPayoffDate').textContent = months_short[payoffDate.getMonth()] + '. ' + payoffDate.getFullYear();
-    
-    generateAmortizationSchedule(loanAmount, monthlyPayment, interestRate, loanTerm);
+    // Show and update the pie chart
+    updatePieChart(principal, totalInterest);
 }
 
-function generateAmortizationSchedule(principal, payment, rate, periods) {
-    const tbody = document.getElementById('loanScheduleBody');
-    tbody.innerHTML = '';
+function updatePieChart(principal, totalInterest) {
+    const chartContainer = document.getElementById('chartContainer');
+    chartContainer.style.display = 'block';
     
-    let balance = principal;
-    const today = new Date();
+    const ctx = document.getElementById('loanChart').getContext('2d');
     
-    for (let i = 1; i <= Math.min(periods, 12); i++) {
-        const interestPayment = balance * rate;
-        const principalPayment = payment - interestPayment;
-        balance -= principalPayment;
-        
-        const paymentDate = new Date(today.getFullYear(), today.getMonth() + i, today.getDate());
-        const dateStr = (paymentDate.getMonth() + 1) + '/' + paymentDate.getDate() + '/' + paymentDate.getFullYear();
-        
-        const row = tbody.insertRow();
-        row.insertCell(0).textContent = i;
-        row.insertCell(1).textContent = dateStr;
-        row.insertCell(2).textContent = '$' + interestPayment.toFixed(2);
-        row.insertCell(3).textContent = '$' + principalPayment.toFixed(2);
-        row.insertCell(4).textContent = '$' + Math.max(0, balance).toFixed(2);
+    // Destroy existing chart if it exists
+    if (myChart) {
+        myChart.destroy();
     }
-}
-
-function clearLoan() {
-    document.getElementById('loanAmountInput').value = '';
-    document.getElementById('loanTermYears').value = '';
-    document.getElementById('loanTermMonths').value = '';
-    document.getElementById('loanInterestRate').value = '';
     
-    document.getElementById('loanPayment').textContent = '$0.00';
-    document.getElementById('totalPayments').textContent = '$0.00';
-    document.getElementById('loanTotalInterest').textContent = '$0.00';
-    document.getElementById('loanSummaryAmount').textContent = '$0.00';
-    document.getElementById('loanSummaryRate').textContent = '0.00%';
-    document.getElementById('loanSummaryTerm').textContent = '0 years';
-    document.getElementById('loanSummaryPayments').textContent = '0';
-    document.getElementById('loanSummaryTotalInterest').textContent = '$0.00';
-    document.getElementById('loanPayoffDate').textContent = '';
-    
-    document.getElementById('loanScheduleBody').innerHTML = '';
+    // Create new pie chart
+    myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Principal Amount', 'Total Interest Paid'],
+            datasets: [{
+                data: [principal, totalInterest],
+                backgroundColor: [
+                    '#2563eb',  // Blue for principal
+                    '#f59e0b'   // Orange for interest
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        font: {
+                            size: 13,
+                            family: 'Inter, system-ui, sans-serif'
+                        },
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.parsed || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return label + ': $' + value.toFixed(2) + ' (' + percentage + '%)';
+                        }
+                    },
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 12,
+                    bodyFont: {
+                        size: 13,
+                        family: 'Inter, system-ui, sans-serif'
+                    },
+                    displayColors: true
+                }
+            }
+        }
+    });
 }
 
 window.onload = function() {
-    const form = document.querySelector('form');
+    const form = document.getElementById('loanForm');
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
