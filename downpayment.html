@@ -21,8 +21,8 @@
     h1 { font-size:clamp(22px, 2.4vw, 28px); margin:28px 0 8px; }
     .subtitle { color:var(--muted); margin-bottom:28px; }
     .calculator-grid { display:flex; gap:var(--grid-gap); align-items:start; }
-    .calculator-grid > .card:first-child { flex:0 0 30%; min-width:250px; }
-    .calculator-grid > .card:last-child { flex:1; }
+    .calculator-grid > .card:first-child { flex:0 0 50%; min-width:250px; }
+    .calculator-grid > .card:last-child { flex:0 0 50%; }
     @media (max-width:920px){ .calculator-grid { flex-direction:column; } .calculator-grid > .card:first-child, .calculator-grid > .card:last-child { flex:1 1 auto; width:100%; } }
     .card, .result-card { background: linear-gradient(180deg, rgba(26,32,66,.85), rgba(18,23,51,.95)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); }
     .card{ padding:24px; }
@@ -57,13 +57,13 @@
     <div class="nav-content" role="navigation" aria-label="Primary">
       <div class="nav-logo" aria-label="Property Calculator Hub">
         <div class="dot" aria-hidden="true"></div>
-        <span>Property Calculator Hub</span>
+        Property Calculator Hub
       </div>
       <ul class="nav-menu">
-        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
-        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
-        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
-        <li><a class="nav-link active" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
+        <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
+        <li><a href="downpayment.html" class="nav-link active">Down Payment Calculator</a></li>
       </ul>
     </div>
   </header>
@@ -113,11 +113,11 @@
         </div>
         <div class="foot-grid">
           <div class="foot-card">
-            <strong>📈 Tip:</strong><br/>
+            <strong>📈 Tip:</strong><br>
             A 20% down payment typically helps you avoid PMI (Private Mortgage Insurance).
           </div>
           <div class="foot-card">
-            <strong>💳 Closing Costs:</strong><br/>
+            <strong>💳 Closing Costs:</strong><br>
             Typically range from 2% to 5% of the home price.
           </div>
         </div>
