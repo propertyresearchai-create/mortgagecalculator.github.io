@@ -37,9 +37,9 @@ function drawPieChart() {
     const total = principalInterest + monthlyTax + monthlyInsurance + monthlyPMI + monthlyHOA;
     
     const data = [
-        { label: 'Principal & Interest', value: principalInterest, color: '#4CAF50' },
-        { label: 'Property Tax', value: monthlyTax, color: '#2196F3' },
-        { label: 'Home Insurance', value: monthlyInsurance, color: '#FFC107' },
+        { label: 'P&I', value: principalInterest, color: '#4CAF50' },
+        { label: 'Tax', value: monthlyTax, color: '#2196F3' },
+        { label: 'Insurance', value: monthlyInsurance, color: '#FFC107' },
         { label: 'PMI', value: monthlyPMI, color: '#FF5722' },
         { label: 'HOA', value: monthlyHOA, color: '#9C27B0' }
     ];
@@ -50,13 +50,37 @@ function drawPieChart() {
     
     data.forEach(item => {
         const sliceAngle = (item.value / total) * 2 * Math.PI;
+        const percentage = ((item.value / total) * 100).toFixed(1);
         
+        // Draw pie slice
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
         ctx.closePath();
         ctx.fillStyle = item.color;
         ctx.fill();
+        
+        // Add percentage text inside sector only if slice is visible (>0.5%)
+        if (parseFloat(percentage) > 0.5) {
+            // Calculate position for text (at the middle of the slice, 60% of radius from center)
+            const textAngle = currentAngle + sliceAngle / 2;
+            const textX = centerX + Math.cos(textAngle) * (radius * 0.6);
+            const textY = centerY + Math.sin(textAngle) * (radius * 0.6);
+            
+            // Draw percentage text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 3;
+            ctx.fillText(percentage + '%', textX, textY);
+            ctx.shadowBlur = 0;
+            
+            // Draw label below percentage
+            ctx.font = '11px Arial';
+            ctx.fillText(item.label, textX, textY + 16);
+        }
         
         currentAngle += sliceAngle;
     });
