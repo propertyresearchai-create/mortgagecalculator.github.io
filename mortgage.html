@@ -23,31 +23,25 @@
     .hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}
     .hero h1{font-family:"Source Serif 4",Georgia,serif;margin:0 0 6px;font-size:32px;color:#0f172a}
     .hero p{margin:0;color:var(--muted)}
-
     /* Layout 40/60 split */
     .container{max-width:1100px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:40% 60%;gap:20px;align-items:start}
     @media (max-width: 900px){.container{grid-template-columns:1fr}}
-
     .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
     .panel .inner{padding:18px}
     .panel h3{margin:0 0 12px;font-size:16px;color:#0f172a}
-
     form .field{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
     form .field:last-child{border-bottom:none}
     form label{font-weight:600;color:#111827}
     form input{width:160px;max-width:50%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff}
-
     /* Center buttons below inputs */
     .actions{display:flex;justify-content:center;gap:12px;margin-top:16px}
     .btn{cursor:pointer;border:1px solid var(--border);background:#111827;color:#fff;border-radius:999px;padding:10px 14px;font-weight:600}
     .btn.secondary{background:#fff;color:#111827}
     .btn:hover{filter:brightness(0.96)}
-
     .result{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .card{border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
     .k{color:var(--muted);font-size:12px}
     .v{font-size:20px;font-weight:700;color:#0f172a}
-
     canvas{max-width:100%}
   </style>
 </head>
@@ -59,50 +53,45 @@
         <a href="index.html">🏠 Home</a>
         <a class="active" href="mortgage.html">Mortgage Calculator</a>
         <a href="loan.html">Loan Calculator</a>
-        <a href="rent.html">Rent</a>
-        <a href="roi.html">ROI</a>
       </div>
     </div>
   </nav>
-
   <section class="hero">
     <h1>💰 Mortgage Calculator</h1>
     <p>Estimate your monthly mortgage payment including taxes and insurance</p>
   </section>
-
   <div class="container">
     <!-- Left: 40% inputs -->
     <div class="panel">
       <div class="inner">
         <h3>📝 Loan Details</h3>
         <form id="mortgageForm" onsubmit="return false;">
-          <div class="field"><label for="homePrice">Home Price</label><input id="homePrice" type="number" value="300000" aria-label="Home Price" /> </div>
-          <div class="field"><label for="downPayment">Down Payment</label><input id="downPayment" type="number" value="60000" aria-label="Down Payment" /> </div>
-          <div class="field"><label for="termYears">Loan Term (Years)</label><input id="termYears" type="number" value="30" aria-label="Loan Term (Years)" min="1" max="50" /> </div>
-          <div class="field"><label for="rate">Interest Rate (%)</label><input id="rate" type="number" value="6.5" step="0.01" aria-label="Interest Rate" /> </div>
-          <div class="field"><label for="taxAnnual">Property Tax (Annual)</label><input id="taxAnnual" type="number" value="3600" aria-label="Property Tax (Annual)" /> </div>
-          <div class="field"><label for="insAnnual">Home Insurance (Annual)</label><input id="insAnnual" type="number" value="1200" aria-label="Home Insurance (Annual)" /> </div>
-          <div class="field"><label for="pmiMonthly">PMI (Monthly)</label><input id="pmiMonthly" type="number" value="0" aria-label="PMI (Monthly)" /> </div>
-          <div class="field"><label for="hoaMonthly">HOA (Monthly)</label><input id="hoaMonthly" type="number" value="0" aria-label="HOA (Monthly)" /> </div>
+          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price"> </div>
+          <div class="field"><label for="downPayment">Down Payment</label><input type="number" id="downPayment" value="60000" aria-label="Down Payment"> </div>
+          <div class="field"><label for="termYears">Loan Term (Years)</label><input type="number" id="termYears" min="1" max="50" value="30" aria-label="Loan Term (Years)"> </div>
+          <div class="field"><label for="rate">Interest Rate (%)</label><input type="number" id="rate" step="0.01" value="6.5" aria-label="Interest Rate"> </div>
+          <div class="field"><label for="taxAnnual">Property Tax (Annual)</label><input type="number" id="taxAnnual" value="3600" aria-label="Property Tax (Annual)"> </div>
+          <div class="field"><label for="insAnnual">Home Insurance (Annual)</label><input type="number" id="insAnnual" value="1200" aria-label="Home Insurance (Annual)"> </div>
+          <div class="field"><label for="pmiMonthly">PMI (Monthly)</label><input type="number" id="pmiMonthly" value="0" aria-label="PMI (Monthly)"> </div>
+          <div class="field"><label for="hoaMonthly">HOA (Monthly)</label><input type="number" id="hoaMonthly" value="0" aria-label="HOA (Monthly)"> </div>
           <div class="actions">
-            <button id="calcBtn" class="btn" type="button">💰 Calculate</button>
-            <button id="resetBtn" class="btn secondary" type="button">🔄 Reset</button>
+            <button type="button" class="btn" id="calcBtn">💰 Calculate</button>
+            <button type="button" class="btn secondary" id="resetBtn">🔄 Reset</button>
           </div>
         </form>
       </div>
     </div>
-
     <!-- Right: 60% results -->
     <div class="panel">
       <div class="inner">
         <h3>📊 Monthly Payment Breakdown</h3>
         <div class="result">
-          <div class="card"><div class="k">Principal & Interest</div><div id="pi" class="v">$0</div></div>
-          <div class="card"><div class="k">Property Tax</div><div id="ti" class="v">$0</div></div>
-          <div class="card"><div class="k">Home Insurance</div><div id="hi" class="v">$0</div></div>
-          <div class="card"><div class="k">PMI</div><div id="pmi" class="v">$0</div></div>
-          <div class="card"><div class="k">HOA</div><div id="hoa" class="v">$0</div></div>
-          <div class="card" style="grid-column:1/-1"><div class="k">Total Monthly Payment</div><div id="totalMonthly" class="v">$0</div></div>
+          <div class="card"><div class="k">Principal & Interest</div><div class="v" id="pi">$0</div></div>
+          <div class="card"><div class="k">Property Tax</div><div class="v" id="ti">$0</div></div>
+          <div class="card"><div class="k">Home Insurance</div><div class="v" id="hi">$0</div></div>
+          <div class="card"><div class="k">PMI</div><div class="v" id="pmi">$0</div></div>
+          <div class="card"><div class="k">HOA</div><div class="v" id="hoa">$0</div></div>
+          <div class="card" style="grid-column:1/-1"><div class="k">Total Monthly Payment</div><div class="v" id="totalMonthly">$0</div></div>
         </div>
         <div style="margin-top:18px">
           <canvas id="breakdownChart" height="80"></canvas>
@@ -111,12 +100,10 @@
       </div>
     </div>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
     const fmt = (n) => Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
-
     function calc(){
       const price = parseFloat($("homePrice").value) || 0;
       const down = parseFloat($("downPayment").value) || 0;
@@ -126,7 +113,6 @@
       const insA = Math.max(0, parseFloat($("insAnnual").value) || 0);
       const pmiM = Math.max(0, parseFloat($("pmiMonthly").value) || 0);
       const hoaM = Math.max(0, parseFloat($("hoaMonthly").value) || 0);
-
       const loan = Math.max(0, price - down);
       const n = termY * 12;
       const r = rate / 12;
@@ -139,19 +125,16 @@
       const ti = taxA / 12;
       const hi = insA / 12;
       const total = pi + ti + hi + pmiM + hoaM;
-
       $("totalMonthly").textContent = `$${fmt(total)}`;
       $("pi").textContent = `$${fmt(pi)}`;
       $("ti").textContent = `$${fmt(ti)}`;
       $("hi").textContent = `$${fmt(hi)}`;
       $("pmi").textContent = `$${fmt(pmiM)}`;
       $("hoa").textContent = `$${fmt(hoaM)}`;
-
       const data = [pi, ti, hi, pmiM, hoaM];
       const labels = ['Principal & Interest','Taxes','Insurance','PMI','HOA'];
       const totalParts = data.reduce((a,b)=>a+b,0) || 1;
       const perc = data.map(v=> Math.round(v*100/totalParts));
-
       if (!window._chart){
         const ctx = document.getElementById('breakdownChart').getContext('2d');
         window._chart = new Chart(ctx, {
@@ -165,7 +148,6 @@
         window._chart.update();
       }
     }
-
     document.getElementById('calcBtn').addEventListener('click', calc);
     document.getElementById('resetBtn').addEventListener('click', ()=>{ document.getElementById('mortgageForm').reset(); calc(); });
     document.getElementById('mortgageForm').addEventListener('input', calc);
