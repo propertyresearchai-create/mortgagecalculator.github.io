@@ -34,322 +34,143 @@
     
     .hero h1 {
       margin: 0 0 6px;
-      font-size: 32px;
-      font-weight: 700;
-      color: #34495e;
+      font-size: 28px;
+      color: var(--text);
     }
     
     .hero p {
-      margin: 0 0 16px;
+      margin: 0;
+      font-size: 16px;
       color: var(--muted);
     }
     
-    /* Category filter chips */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 14px 0 24px;
-    }
-    
-    .chip {
-      border: 1px solid #d8e0ea;
-      background: var(--chip);
-      color: var(--chip-text);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 14px;
-      cursor: pointer;
-      user-select: none;
-      transition: all .2s ease;
-    }
-    
-    .chip.active,
-    .chip:hover {
-      background: var(--brand);
-      border-color: var(--brand);
-      color: #fff;
-    }
-    
-    /* Grid */
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
-      padding: 8px 0 40px;
-    }
-    
-    @media (max-width: 980px) {
-      .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 640px) {
-      .blog-grid {
-        grid-template-columns: 1fr;
-      }
+      padding: 30px 0 50px;
     }
     
     .blog-card {
       background: var(--bg);
-      border: 1px solid #e5eaf1;
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
     
     .blog-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16,24,40,.08);
-      border-color: #dfe6ef;
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
     
-    .thumb {
-      aspect-ratio: 16/9;
-      background: #e9eef5;
-      display: block;
-      width: 100%;
-      object-fit: cover;
+    .blog-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--text);
     }
     
-    .content {
-      padding: 16px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .blog-card p {
+      margin: 0 0 12px;
+      font-size: 14px;
+      line-height: 1.5;
       color: var(--muted);
-      font-size: 13px;
-      margin: 0 0 6px;
+    }
+    
+    .blog-meta {
+      display: flex;
+      gap: 8px;
       flex-wrap: wrap;
     }
     
-    .meta .sep {
-      opacity: .5;
-    }
-    
-    .tag {
-      background: #FFF5E6;
-      color: #D68910;
+    .blog-chip {
+      background: var(--chip);
+      color: var(--chip-text);
+      padding: 4px 10px;
+      border-radius: 12px;
       font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 999px;
+      font-weight: 500;
     }
     
-    .content h2 {
-      margin: 8px 0;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 1.4;
-      color: #34495e;
-    }
-    
-    .excerpt {
-      margin: 6px 0 12px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-      flex-grow: 1;
-    }
-    
-    .read-more {
+    .back-to-home {
       display: inline-block;
-      color: var(--brand);
+      padding: 8px 16px;
+      margin: 16px 0 0 0;
+      background: var(--bg);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
       font-size: 14px;
       font-weight: 500;
-      text-decoration: none;
-      transition: color .2s;
+      transition: background 0.2s;
     }
     
-    .read-more:hover {
-      color: #E69D2C;
-    }
-    
-    /* Pagination */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 20px 0 60px;
-    }
-    
-    .pagination button {
-      border: 1px solid #d8e0ea;
-      background: white;
-      color: #34495e;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all .2s;
-      min-width: 40px;
-    }
-    
-    .pagination button:hover {
-      background: #F9FBFF;
-      border-color: var(--brand);
-    }
-    
-    .pagination button.active {
-      background: var(--brand);
-      border-color: var(--brand);
-      color: white;
+    .back-to-home:hover {
+      background: var(--chip);
     }
   </style>
 </head>
 <body>
+  <!-- Back to Home Link -->
+  <div class="container">
+    <a href="index.html" class="back-to-home">← Back to Home</a>
+  </div>
+  
+  <!-- Navigation Bar -->
   <nav class="top-navigation">
-    <div class="nav-content">
-      <div class="nav-brand">Property Calculator Hub</div>
-      <ul class="nav-links">
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="mortgage.html">Mortgage Calculator</a></li>
-        <li><a href="loan.html">Loan Calculator</a></li>
-        <li><a href="downpayment.html">Down Payment Calculator</a></li>
-        <li><a href="blog.html" class="active">📝 Blog</a></li>
-      </ul>
+    <div class="container">
+      <div class="nav-content">
+        <a href="index.html" class="nav-brand">Property Calculator Hub</a>
+        <div class="nav-links">
+          <a href="index.html">🏠 Home</a>
+          <a href="mortgage.html">Mortgage Calculator</a>
+          <a href="loan.html">Loan Calculator</a>
+          <a href="downpayment.html">Down Payment Calculator</a>
+          <a href="blog.html" class="active">📝 Blog</a>
+        </div>
+      </div>
     </div>
   </nav>
-
-  <main>
-    <div class="container">
-      <div class="hero">
-        <h1>Mortgage & Property Insights</h1>
-        <p>Expert guides, tips, and market analysis to help you navigate home financing</p>
-      </div>
-
-      <div class="filters">
-        <span class="chip active" data-category="all">All Articles</span>
-        <span class="chip" data-category="guides">Guides</span>
-        <span class="chip" data-category="market">Market Trends</span>
-        <span class="chip" data-category="tips">Tips</span>
-        <span class="chip" data-category="calculator">Calculator Help</span>
-      </div>
-
-      <div class="blog-grid">
-        <article class="blog-card" data-category="guides">
-          <img class="thumb" src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&h=340&fit=crop" alt="Understanding Mortgage Rates">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Guide</span>
-              <span class="sep">•</span>
-              <span>5 min read</span>
-            </div>
-            <h2>Understanding Mortgage Rates: What You Need to Know</h2>
-            <p class="excerpt">Learn how mortgage rates are determined and what factors influence them to make smarter financing decisions.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card" data-category="tips">
-          <img class="thumb" src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&h=340&fit=crop" alt="First-Time Homebuyer Tips">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Tips</span>
-              <span class="sep">•</span>
-              <span>7 min read</span>
-            </div>
-            <h2>10 Essential Tips for First-Time Homebuyers</h2>
-            <p class="excerpt">Navigate your first home purchase with confidence using these proven strategies and insider tips.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card" data-category="calculator">
-          <img class="thumb" src="https://images.unsplash.com/photo-1554224311-beee2c770dfc?w=600&h=340&fit=crop" alt="Down Payment Calculator">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Calculator Help</span>
-              <span class="sep">•</span>
-              <span>4 min read</span>
-            </div>
-            <h2>How to Use Our Down Payment Calculator Effectively</h2>
-            <p class="excerpt">Maximize the benefit of our calculators with this comprehensive guide to features and best practices.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card" data-category="market">
-          <img class="thumb" src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=340&fit=crop" alt="2024 Housing Market">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Market Trends</span>
-              <span class="sep">•</span>
-              <span>6 min read</span>
-            </div>
-            <h2>2024 Housing Market Outlook: Trends to Watch</h2>
-            <p class="excerpt">Stay informed about current market conditions and predictions for the year ahead in real estate.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card" data-category="guides">
-          <img class="thumb" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=340&fit=crop" alt="Refinancing Guide">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Guide</span>
-              <span class="sep">•</span>
-              <span>8 min read</span>
-            </div>
-            <h2>The Complete Guide to Mortgage Refinancing</h2>
-            <p class="excerpt">Discover when and how to refinance your mortgage to save thousands over the life of your loan.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card" data-category="tips">
-          <img class="thumb" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=340&fit=crop" alt="Credit Score Tips">
-          <div class="content">
-            <div class="meta">
-              <span class="tag">Tips</span>
-              <span class="sep">•</span>
-              <span>5 min read</span>
-            </div>
-            <h2>Improving Your Credit Score Before Buying a Home</h2>
-            <p class="excerpt">Simple strategies to boost your credit score and qualify for better mortgage rates and terms.</p>
-            <a href="#" class="read-more">Read More →</a>
-          </div>
-        </article>
-      </div>
-
-      <nav class="pagination" aria-label="Pagination">
-        <button aria-label="Previous">‹</button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button aria-label="Next">›</button>
-      </nav>
+  
+  <!-- Blog Hero Section -->
+  <div class="container">
+    <section class="hero">
+      <h1>Mortgage & Home Buying Blog</h1>
+      <p>Expert insights and guides to help you navigate your home buying journey</p>
+    </section>
+    
+    <!-- Blog Card Grid -->
+    <div class="blog-grid">
+      <a href="buying-your-first-home.html" class="blog-card">
+        <h2>Buying Your First Home: A Complete Guide</h2>
+        <p>Everything you need to know before purchasing your first property, from budgeting to closing.</p>
+        <div class="blog-meta">
+          <span class="blog-chip">First-Time Buyers</span>
+          <span class="blog-chip">5 min read</span>
+        </div>
+      </a>
+      
+      <a href="fixed-vs-adjustable.html" class="blog-card">
+        <h2>Fixed vs. Adjustable Rate Mortgages</h2>
+        <p>Understanding the pros and cons of each mortgage type to make the best decision for your situation.</p>
+        <div class="blog-meta">
+          <span class="blog-chip">Mortgage Types</span>
+          <span class="blog-chip">4 min read</span>
+        </div>
+      </a>
+      
+      <a href="top-mortgage-mistakes.html" class="blog-card">
+        <h2>Top 10 Mortgage Mistakes to Avoid</h2>
+        <p>Learn from common pitfalls that can cost you thousands during the home buying process.</p>
+        <div class="blog-meta">
+          <span class="blog-chip">Tips & Advice</span>
+          <span class="blog-chip">6 min read</span>
+        </div>
+      </a>
     </div>
-  </main>
-
-  <script>
-    const chips = document.querySelectorAll('.chip');
-    const cards = document.querySelectorAll('.blog-card');
-
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const category = chip.dataset.category;
-        
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        
-        cards.forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
+  </div>
 </body>
 </html>
