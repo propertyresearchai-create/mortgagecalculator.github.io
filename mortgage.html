@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mortgage Calculator</title>
+  <title>Mortgage Calculator - Property Calculator Hub</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <h1>🏠 Property Calculator Hub</h1>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="mortgage.html" class="active">Mortgage</a></li>
-        <li><a href="loan.html">Loan</a></li>
-        <li><a href="downpayment.html">Down Payment</a></li>
-        <li><a href="blog.html">Blog</a></li>
+  <nav class="top-navigation">
+    <div class="nav-content">
+      <div class="nav-logo">
+        Property Calculator Hub
+      </div>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link active" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a class="nav-link" href="blog.html">📝 Blog</a></li>
       </ul>
     </div>
   </nav>
-  <main>
-    <h1>💰 Mortgage Calculator</h1>
-    <p class="subtitle">Estimate your monthly mortgage payment including taxes and insurance</p>
+  <div class="container">
+    <div class="hero-section">
+      <h1>💰 Mortgage Calculator</h1>
+      <p class="hero-description">Estimate your monthly mortgage payment including taxes and insurance</p>
+    </div>
     <div class="calculator-container">
       <div class="card">
         <h2>📝 Loan Details</h2>
@@ -60,7 +64,7 @@
               <div class="form-group">
                 <label for="interestRate">Interest Rate</label>
                 <div class="field">
-                  <input type="number" id="interestRate" value="6.5" step="0.1" min="0">
+                  <input type="number" id="interestRate" value="6.5" min="0" step="0.1">
                   <span class="suffix">%</span>
                 </div>
               </div>
@@ -143,56 +147,7 @@
         <p class="disclaimer">*Estimates only. Consult a lender for accurate figures.</p>
       </div>
     </div>
-  </main>
-  <script>
-    function calculate() {
-      const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
-      const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-      const loanTerm = parseFloat(document.getElementById('loanTerm').value) || 30;
-      const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-      const propertyTax = parseFloat(document.getElementById('propertyTax').value) || 0;
-      const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) || 0;
-      const pmi = parseFloat(document.getElementById('pmi').value) || 0;
-      const hoa = parseFloat(document.getElementById('hoa').value) || 0;
-      
-      const loanAmount = homePrice - downPayment;
-      const monthlyRate = interestRate / 100 / 12;
-      const numPayments = loanTerm * 12;
-      
-      let principalInterest = 0;
-      if (monthlyRate > 0) {
-        principalInterest = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
-      } else {
-        principalInterest = loanAmount / numPayments;
-      }
-      
-      const monthlyTax = propertyTax / 12;
-      const monthlyInsurance = homeInsurance / 12;
-      const total = principalInterest + monthlyTax + monthlyInsurance + pmi + hoa;
-      
-      document.getElementById('principalInterest').textContent = '$' + principalInterest.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      document.getElementById('monthlyTax').textContent = '$' + monthlyTax.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      document.getElementById('monthlyInsurance').textContent = '$' + monthlyInsurance.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      document.getElementById('monthlyPMI').textContent = '$' + pmi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      document.getElementById('monthlyHOA').textContent = '$' + hoa.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      document.getElementById('totalPayment').textContent = '$' + total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-    
-    function resetForm() {
-      document.getElementById('homePrice').value = '300000';
-      document.getElementById('downPayment').value = '60000';
-      document.getElementById('loanTerm').value = '30';
-      document.getElementById('interestRate').value = '6.5';
-      document.getElementById('propertyTax').value = '3600';
-      document.getElementById('homeInsurance').value = '1200';
-      document.getElementById('pmi').value = '0';
-      document.getElementById('hoa').value = '0';
-      calculate();
-    }
-    
-    window.onload = function() {
-      calculate();
-    };
-  </script>
+  </div>
+  <script src="mortgage.js"></script>
 </body>
 </html>
