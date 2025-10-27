@@ -5,348 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loan Calculator - Property Calculator Hub</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    :root {
-      --brand: #13406a;
-      --brand-700: #0e2f4e;
-      --accent: #2ea44f;
-      --accent-700: #22863a;
-      --bg: #0d1117;
-      --card: #161b22;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --border: #30363d;
-      --danger: #d73a49;
-      --space-4: .25rem;
-      --space-8: .5rem;
-      --space-12: .75rem;
-      --space-16: 1rem;
-      --space-24: 1.5rem;
-      --radius: 12px;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji";
-      margin: 0;
-    }
-    .top-navigation {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: var(--space-12) var(--space-24);
-    }
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: var(--space-24);
-    }
-    .nav-brand {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .nav-links {
-      display: flex;
-      gap: var(--space-16);
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      padding: var(--space-8) var(--space-12);
-      border-radius: var(--radius);
-      transition: all 0.2s;
-      font-size: 0.95rem;
-    }
-    .nav-links a:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .nav-links a.active {
-      color: var(--text);
-      background: var(--brand);
-    }
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: var(--space-24);
-    }
-    .page-header {
-      margin-bottom: var(--space-24);
-    }
-    .page-header h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin: 0 0 var(--space-8) 0;
-    }
-    .page-header p {
-      color: var(--muted);
-      margin: 0;
-    }
-    .calculator-layout {
-      display: flex;
-      gap: var(--space-24);
-      align-items: flex-start;
-    }
-    .input-section {
-      flex: 0 0 40%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--space-24);
-    }
-    .results-section {
-      flex: 0 0 calc(60% - var(--space-24));
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--space-24);
-    }
-    .input-section h2,
-    .results-section h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin: 0 0 var(--space-16) 0;
-    }
-    .form-group {
-      margin-bottom: var(--space-16);
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: var(--space-8);
-      color: var(--text);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: var(--space-12);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: 2px solid var(--brand);
-      outline-offset: 1px;
-    }
-    .calculate-btn {
-      width: 100%;
-      padding: var(--space-12);
-      background: var(--brand);
-      color: var(--text);
-      border: none;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .calculate-btn:hover {
-      background: var(--brand-700);
-    }
-    .result-grid {
-      display: grid;
-      gap: var(--space-16);
-    }
-    .result-card {
-      background: var(--bg);
-      padding: var(--space-16);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-    .result-card h3 {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin: 0 0 var(--space-8) 0;
-      font-weight: 500;
-    }
-    .result-card .value {
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: var(--text);
-      margin: 0;
-    }
-    .breakdown-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: var(--space-16);
-    }
-    .breakdown-table th,
-    .breakdown-table td {
-      padding: var(--space-12);
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    .breakdown-table th {
-      color: var(--muted);
-      font-weight: 500;
-      font-size: 0.875rem;
-    }
-    .breakdown-table td {
-      color: var(--text);
-    }
-    @media (max-width: 968px) {
-      .calculator-layout {
-        flex-direction: column;
-      }
-      .input-section,
-      .results-section {
-        flex: 1 1 100%;
-        width: 100%;
-      }
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-12);
-      }
-    }
-  </style>
 </head>
 <body>
   <nav class="top-navigation">
-    <div class="nav-container">
-      <a href="index.html" class="nav-brand">Property Calculator Hub</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="mortgage.html">Mortgage Calculator</a>
-        <a href="loan.html" class="active">Loan Calculator</a>
+    <div class="nav-content">
+      <div class="nav-logo">
+        Property Calculator Hub
       </div>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link active" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a class="nav-link" href="blog.html">📝 Blog</a></li>
+      </ul>
     </div>
   </nav>
-
   <div class="container">
-    <div class="page-header">
-      <h1>Loan Calculator</h1>
-      <p>Calculate monthly payments and total interest for personal loans</p>
+    <div class="hero-section">
+      <h1>💳 Loan Calculator</h1>
+      <p class="hero-description">Calculate loan payments for personal loans, student loans, and more</p>
     </div>
-
-    <div class="calculator-layout">
-      <div class="input-section">
-        <h2>Loan Details</h2>
+    <div class="calculator-container">
+      <div class="card">
+        <h2>📝 Loan Details</h2>
         <form id="loanForm">
-          <div class="form-group">
-            <label for="loanAmount">Loan Amount ($)</label>
-            <input type="number" id="loanAmount" placeholder="50000" value="50000" step="1000" required>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="loanAmount">Loan Amount</label>
+                <div class="field">
+                  <input type="number" id="loanAmount" value="10000" min="0">
+                  <span class="suffix">$</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="loanTerm">Loan Term (Years)</label>
+                <div class="field">
+                  <input type="number" id="loanTerm" value="5" min="1" max="50">
+                  <span class="suffix">yrs</span>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="interestRate">Annual Interest Rate (%)</label>
-            <input type="number" id="interestRate" placeholder="6.5" value="6.5" step="0.1" required>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="interestRate">Interest Rate</label>
+                <div class="field">
+                  <input type="number" id="interestRate" value="5.0" min="0" step="0.1">
+                  <span class="suffix">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="paymentFrequency">Payment Frequency</label>
+                <select id="paymentFrequency" class="field">
+                  <option value="12">Monthly</option>
+                  <option value="26">Bi-weekly</option>
+                  <option value="52">Weekly</option>
+                </select>
+              </div>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="loanTerm">Loan Term (Years)</label>
-            <input type="number" id="loanTerm" placeholder="5" value="5" step="1" required>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" onclick="calculate()">💰 Calculate</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
           </div>
-
-          <div class="form-group">
-            <label for="loanType">Loan Type</label>
-            <select id="loanType">
-              <option value="personal">Personal Loan</option>
-              <option value="auto">Auto Loan</option>
-              <option value="student">Student Loan</option>
-              <option value="business">Business Loan</option>
-            </select>
-          </div>
-
-          <button type="submit" class="calculate-btn">Calculate Payment</button>
         </form>
       </div>
-
-      <div class="results-section">
-        <h2>Payment Summary</h2>
-        <div class="result-grid">
-          <div class="result-card">
-            <h3>Monthly Payment</h3>
-            <p class="value" id="monthlyPayment">$975.41</p>
+      <div class="card">
+        <h2>📊 Payment Breakdown</h2>
+        <div class="results">
+          <div class="result-item">
+            <span class="result-label">Payment Amount</span>
+            <span class="result-value" id="paymentAmount">$0</span>
           </div>
-          
-          <div class="result-card">
-            <h3>Total Amount Paid</h3>
-            <p class="value" id="totalPaid">$58,524.60</p>
+          <div class="result-item">
+            <span class="result-label">Total Payments</span>
+            <span class="result-value" id="totalPayments">$0</span>
           </div>
-          
-          <div class="result-card">
-            <h3>Total Interest Paid</h3>
-            <p class="value" id="totalInterest">$8,524.60</p>
+          <div class="result-item">
+            <span class="result-label">Total Interest</span>
+            <span class="result-value" id="totalInterest">$0</span>
+          </div>
+          <div class="result-item total">
+            <span class="result-label">Total Cost</span>
+            <span class="result-value" id="totalCost">$0</span>
           </div>
         </div>
-
-        <table class="breakdown-table">
-          <thead>
-            <tr>
-              <th>Detail</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Principal Amount</td>
-              <td id="principalAmount">$50,000.00</td>
-            </tr>
-            <tr>
-              <td>Interest Rate</td>
-              <td id="displayRate">6.5%</td>
-            </tr>
-            <tr>
-              <td>Loan Term</td>
-              <td id="displayTerm">5 years</td>
-            </tr>
-            <tr>
-              <td>Total Payments</td>
-              <td id="totalPayments">60 months</td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="disclaimer">*Estimates only. Consult a lender for accurate figures.</p>
       </div>
     </div>
   </div>
-
-  <script>
-    function calculateLoan() {
-      const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-      const annualRate = parseFloat(document.getElementById('interestRate').value);
-      const years = parseFloat(document.getElementById('loanTerm').value);
-
-      if (!loanAmount || !annualRate || !years) return;
-
-      const monthlyRate = (annualRate / 100) / 12;
-      const numberOfPayments = years * 12;
-      
-      const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
-                             (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
-      
-      const totalPaid = monthlyPayment * numberOfPayments;
-      const totalInterest = totalPaid - loanAmount;
-
-      document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2);
-      document.getElementById('totalPaid').textContent = '$' + totalPaid.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('totalInterest').textContent = '$' + totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('principalAmount').textContent = '$' + loanAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('displayRate').textContent = annualRate + '%';
-      document.getElementById('displayTerm').textContent = years + ' years';
-      document.getElementById('totalPayments').textContent = numberOfPayments + ' months';
-    }
-
-    document.getElementById('loanForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      calculateLoan();
-    });
-
-    // Calculate on load with default values
-    calculateLoan();
-  </script>
+  <script src="loan.js"></script>
 </body>
 </html>
