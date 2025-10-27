@@ -20,15 +20,21 @@
     h1{font-size:1.75rem;margin:16px 0 6px}
     .subtitle{color:var(--muted);margin:0 0 18px}
     .calculator-grid{display:flex;gap:18px;align-items:start}
-    .calculator-grid > .card:first-child{flex:0 0 50%;min-width:250px}
-    .calculator-grid > .card:last-child{flex:0 0 50%}
-    @media (max-width:900px){.calculator-grid{flex-direction:column}.calculator-grid > .card:first-child,.calculator-grid > .card:last-child{flex:1 1 auto;width:100%}}
+    .calculator-grid > .card:first-child{flex:0 0 40%;min-width:250px}
+    .calculator-grid > .card:last-child{flex:0 0 60%}
+    @media (max-width:900px){
+.calculator-grid{flex-direction:column}
+.calculator-grid > .card:first-child,.calculator-grid > .card:last-child{flex:1 1 auto;width:100%}
+}
     .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
     .card h2{margin:0 0 8px;font-size:1.2rem}
     form{display:grid;gap:14px}
     .row{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-    .col-6{grid-column:span 6}.col-12{grid-column:span 12}
-    @media (max-width:640px){.col-6{grid-column:span 12}}
+    .col-6{grid-column:span 6}
+.col-12{grid-column:span 12}
+    @media (max-width:640px){
+.col-6{grid-column:span 12}
+}
     .form-group{display:flex;flex-direction:column;gap:6px}
     label{font-weight:600;color:#0f1f33;font-size:.95rem}
     .field{display:flex;gap:10px;align-items:center}
@@ -37,41 +43,48 @@
     .suffix{color:var(--muted);font-weight:600}
     .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
     .btn{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:600}
-    .btn-primary{background:var(--brand-2);color:#fff}.btn-primary:hover{background:#0e4c70}
-    .btn-secondary{background:#eef3f8;color:#0f1f33}.btn-secondary:hover{background:#e3edf6}
+    .btn-primary{background:var(--brand-2);color:#fff}
+.btn-primary:hover{background:#0e4c70}
+    .btn-secondary{background:#eef3f8;color:#0f1f33}
+.btn-secondary:hover{background:#e3edf6}
     .results{display:grid;gap:10px}
     .result-item{display:flex;justify-content:space-between;padding:10px 12px;border:1px dashed #e3e8ef;border-radius:8px}
     .result-item.total{border-style:solid;border-color:#d6dee6;background:#f8fbff;font-weight:700}
     .result-label{color:var(--muted)}
     .result-value{font-variant-numeric:tabular-nums}
     .disclaimer{color:var(--muted);font-size:.9rem;margin-top:10px}
-    canvas{max-width:100%;height:auto}
+    canvas{max-width:100%;height:auto;display:block;margin:24px auto 0 auto}
+    .chart-container{display:flex;justify-content:center;align-items:center;padding:20px 0}
   </style>
 </head>
 <body>
   <nav class="top-navigation">
     <div class="nav-content">
-      <div class="nav-logo">Property Calculator Hub</div>
+      <div class="nav-logo">🏠 Property Calculator Hub</div>
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
-        <li><a href="mortgage.html" class="nav-link active">Mortgage Calculator</a></li>
-        <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
-        <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="mortgage.html" class="nav-link active">Mortgage</a></li>
+        <li><a href="roi.html" class="nav-link">ROI</a></li>
+        <li><a href="affordability.html" class="nav-link">Affordability</a></li>
       </ul>
     </div>
   </nav>
   <div class="container">
-    <h1>Mortgage Calculator</h1>
-    <p class="subtitle">Estimate your monthly mortgage payment with taxes and insurance.</p>
+    <h1>💰 Mortgage Calculator</h1>
+    <p class="subtitle">Estimate your monthly mortgage payment including taxes and insurance</p>
     <div class="calculator-grid">
       <div class="card">
-        <h2>🏡 Loan Details</h2>
-        <form id="mortgageForm">
-          <div class="form-group">
-            <label for="homePrice">Home Price</label>
-            <div class="field">
-              <input type="number" id="homePrice" value="320000" min="0"/>
-              <span class="suffix">$</span>
+        <h2>📝 Loan Details</h2>
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="homePrice">Home Price</label>
+                <div class="field">
+                  <input type="number" id="homePrice" value="300000" min="0"/>
+                  <span class="suffix">$</span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -79,37 +92,28 @@
               <div class="form-group">
                 <label for="downPayment">Down Payment</label>
                 <div class="field">
-                  <input type="number" id="downPayment" value="64000" min="0"/>
+                  <input type="number" id="downPayment" value="60000" min="0"/>
                   <span class="suffix">$</span>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label for="downPaymentPercent">Down %</label>
+                <label for="loanTerm">Loan Term (Years)</label>
                 <div class="field">
-                  <input type="number" id="downPaymentPercent" value="20" min="0" max="100" step="0.1"/>
-                  <span class="suffix">%</span>
+                  <input type="number" id="loanTerm" value="30" min="1" max="50"/>
+                  <span class="suffix">yrs</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-12">
               <div class="form-group">
                 <label for="interestRate">Interest Rate</label>
                 <div class="field">
-                  <input type="number" id="interestRate" value="6.5" min="0" step="0.01"/>
+                  <input type="number" id="interestRate" value="6.5" step="0.01" min="0"/>
                   <span class="suffix">%</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="loanTerm">Loan Term</label>
-                <div class="field">
-                  <input type="number" id="loanTerm" value="30" min="1"/>
-                  <span class="suffix">years</span>
                 </div>
               </div>
             </div>
@@ -117,18 +121,18 @@
           <div class="row">
             <div class="col-6">
               <div class="form-group">
-                <label for="propertyTax">Property Tax (Yearly)</label>
+                <label for="propertyTax">Property Tax (Annual)</label>
                 <div class="field">
-                  <input type="number" id="propertyTax" value="3200" min="0"/>
+                  <input type="number" id="propertyTax" value="3600" min="0"/>
                   <span class="suffix">$</span>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label for="homeInsurance">Home Insurance (Yearly)</label>
+                <label for="insurance">Home Insurance (Annual)</label>
                 <div class="field">
-                  <input type="number" id="homeInsurance" value="1600" min="0"/>
+                  <input type="number" id="insurance" value="1200" min="0"/>
                   <span class="suffix">$</span>
                 </div>
               </div>
@@ -188,7 +192,9 @@
             <span class="result-value" id="totalPayment">$0</span>
           </div>
         </div>
-        <canvas id="pieChart" width="300" height="300" style="margin-top:24px"></canvas>
+        <div class="chart-container">
+          <canvas id="pieChart" width="300" height="300"></canvas>
+        </div>
         <p class="disclaimer">*Estimates only. Consult a lender for accurate figures.</p>
       </div>
     </div>
