@@ -1,152 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Mortgage Calculator</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-        
-        .blog-card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .blog-card-title {
-            color: #2c3e50;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-        
-        .blog-card-date {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .blog-card-snippet {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-        
-        .blog-card-link {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s ease;
-            text-align: center;
-        }
-        
-        .blog-card-link:hover {
-            background: #2980b9;
-        }
-        
-        @media (max-width: 768px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Mortgage Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Siemens-like blog grid */
+    :root {
+      --bg:#ffffff; --text:#1f2937; --muted:#6b7280; --brand:#0a66c2; --chip:#eef2f7; --chip-text:#0a2942;
+    }
+    body { background:#f7f9fc; color:var(--text); font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; }
+    .container { width:min(1100px, 92vw); margin:0 auto; }
+    .hero { padding:40px 0 10px; }
+    .hero h1 { margin:0 0 6px; font-size:32px; font-weight:700; }
+    .hero p { margin:0 0 16px; color:var(--muted); }
+
+    /* Category filter chips */
+    .filters { display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 24px; }
+    .chip { border:1px solid #d8e0ea; background:var(--chip); color:var(--chip-text); padding:8px 12px; border-radius:999px; font-size:14px; cursor:pointer; user-select:none; transition:all .2s ease; }
+    .chip.active, .chip:hover { background:var(--brand); border-color:var(--brand); color:#fff; }
+
+    /* Grid */
+    .blog-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:24px; padding:8px 0 40px; }
+    @media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } }
+
+    .blog-card { background:var(--bg); border:1px solid #e5eaf1; border-radius:10px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .blog-card:hover { transform: translateY(-2px); box-shadow:0 6px 20px rgba(16,24,40,.08); border-color:#dfe6ef; }
+    .thumb { aspect-ratio: 16/9; background:#e9eef5; display:block; width:100%; object-fit:cover; }
+
+    .meta { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; margin:0 0 6px; flex-wrap:wrap; }
+    .meta .sep { opacity:.5; }
+    .tag { background:#eef6ff; color:#075985; font-size:12px; padding:4px 8px; border-radius:999px; }
+
+    .content { padding:16px 16px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+    .title { font-size:18px; line-height:1.35; margin:0; color:#0f172a; }
+    .snippet { color:#475569; font-size:14px; line-height:1.6; margin:0; flex:1; }
+
+    .card-actions { display:flex; justify-content:space-between; align-items:center; padding:0 16px 16px; }
+    .read-more { color:var(--brand); text-decoration:none; font-weight:600; font-size:14px; }
+
+    /* Pagination */
+    .pagination { display:flex; justify-content:center; gap:8px; padding:20px 0 50px; }
+    .page-btn { border:1px solid #d8e0ea; background:#fff; padding:8px 12px; border-radius:8px; cursor:pointer; min-width:36px; }
+    .page-btn.active { background:var(--brand); color:#fff; border-color:var(--brand); }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="mortgage.html">Mortgage Calculator</a></li>
-                    <li><a href="loan.html">Loan Calculator</a></li>
-                    <li><a href="downpayment.html">Down Payment Calculator</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header class="hero">
+    <div class="container">
+      <h1>Mortgage & Property Blog</h1>
+      <p>Expert insights and advice for homebuyers and property investors</p>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Mortgage & Property Blog</h1>
-            <p>Expert insights and advice for homebuyers and property investors</p>
+      <!-- Category filter chips -->
+      <div class="filters" id="filters">
+        <span class="chip active" data-cat="all">All</span>
+        <span class="chip" data-cat="Buying">Buying</span>
+        <span class="chip" data-cat="Rates">Rates</span>
+        <span class="chip" data-cat="Refinance">Refinance</span>
+        <span class="chip" data-cat="Credit">Credit</span>
+        <span class="chip" data-cat="Guides">Guides</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="blog-grid" id="blogGrid">
+      <!-- Card 1 -->
+      <article class="blog-card" data-cat="Buying">
+        <img class="thumb" src="assets/img/blog/thumb-mistakes.jpg" alt="Mortgage mistakes" onerror="this.style.display='none'" />
+        <div class="content">
+          <div class="meta"><span class="tag">Buying</span><span class="sep">•</span><span>Oct 15, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">Top 10 Mortgage Mistakes First-Time Buyers Make</h2>
+          <p class="snippet">Learn the most common pitfalls from credit checks to pre-approval so you can avoid costly errors.</p>
         </div>
+        <div class="card-actions">
+          <a class="read-more" href="top-mortgage-mistakes.html">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="blog-card" data-cat="Guides">
+        <img class="thumb" src="assets/img/blog/thumb-downpayment.jpg" alt="Save for down payment" onerror="this.style.display='none'" />
+        <div class="content">
+          <div class="meta"><span class="tag">Guides</span><span class="sep">•</span><span>Sep 28, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">How to Save for Your First Home Down Payment</h2>
+          <p class="snippet">Practical strategies, assistance programs, and budgeting tips to reach your down payment goal.</p>
+        </div>
+        <div class="card-actions">
+          <a class="read-more" href="buying-your-first-home.html">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="blog-card" data-cat="Rates">
+        <img class="thumb" src="assets/img/blog/thumb-fixed-vs-arm.jpg" alt="Fixed vs ARM" onerror="this.style.display='none'" />
+        <div class="content">
+          <div class="meta"><span class="tag">Rates</span><span class="sep">•</span><span>Sep 10, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">Fixed vs. Adjustable Rate Mortgages: Which is Right for You?</h2>
+          <p class="snippet">Understand key differences and choose the option that fits your financial plans.</p>
+        </div>
+        <div class="card-actions">
+          <a class="read-more" href="fixed-vs-adjustable.html">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Example more posts for pagination demo -->
+      <article class="blog-card" data-cat="Refinance">
+        <div class="content">
+          <div class="meta"><span class="tag">Refinance</span><span class="sep">•</span><span>Aug 22, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">When Does Refinancing Your Mortgage Make Sense?</h2>
+          <p class="snippet">Know the break-even point, costs, and scenarios where refinancing can save you money.</p>
+        </div>
+        <div class="card-actions"><a class="read-more" href="refinance-when-to.html">Read More →</a></div>
+      </article>
+
+      <article class="blog-card" data-cat="Credit">
+        <div class="content">
+          <div class="meta"><span class="tag">Credit</span><span class="sep">•</span><span>Aug 10, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">Improving Your Credit Score Before Applying</h2>
+          <p class="snippet">Actionable steps to boost your score and qualify for better mortgage rates.</p>
+        </div>
+        <div class="card-actions"><a class="read-more" href="improve-credit-before-mortgage.html">Read More →</a></div>
+      </article>
+
+      <article class="blog-card" data-cat="Guides">
+        <div class="content">
+          <div class="meta"><span class="tag">Guides</span><span class="sep">•</span><span>Jul 30, 2024</span><span class="sep">•</span><span>By Admin</span></div>
+          <h2 class="title">Closing Costs Explained</h2>
+          <p class="snippet">A straightforward breakdown of typical closing fees and how to prepare.</p>
+        </div>
+        <div class="card-actions"><a class="read-more" href="closing-costs-explained.html">Read More →</a></div>
+      </article>
     </section>
 
-    <section class="blog-posts">
-        <div class="container">
-            <div class="blog-grid">
-                <!-- Blog Card 1 -->
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <h2 class="blog-card-title">Top 10 Mortgage Mistakes First-Time Buyers Make</h2>
-                        <p class="blog-card-date">October 15, 2024</p>
-                        <p class="blog-card-snippet">
-                            Learn about the most common pitfalls that first-time homebuyers encounter when applying for a mortgage. From not checking credit scores to skipping pre-approval, avoid these costly mistakes.
-                        </p>
-                        <a href="top-mortgage-mistakes.html" class="blog-card-link">Read More</a>
-                    </div>
-                </div>
+    <!-- Pagination (static UI; can be wired later) -->
+    <nav class="pagination" aria-label="Pagination">
+      <button class="page-btn" aria-label="Previous">‹</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn" aria-label="Next">›</button>
+    </nav>
+  </main>
 
-                <!-- Blog Card 2 -->
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <h2 class="blog-card-title">How to Save for Your First Home Down Payment</h2>
-                        <p class="blog-card-date">September 28, 2024</p>
-                        <p class="blog-card-snippet">
-                            Discover practical strategies and tips for saving money towards your first home down payment. Learn about down payment assistance programs, budgeting techniques, and smart saving habits.
-                        </p>
-                        <a href="buying-your-first-home.html" class="blog-card-link">Read More</a>
-                    </div>
-                </div>
+  <footer class="container" style="padding:20px 0 40px; color:var(--muted); font-size:14px;">
+    © 2024 Mortgage Calculator. All rights reserved.
+  </footer>
 
-                <!-- Blog Card 3 -->
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <h2 class="blog-card-title">Fixed vs. Adjustable Rate Mortgages: Which is Right for You?</h2>
-                        <p class="blog-card-date">September 10, 2024</p>
-                        <p class="blog-card-snippet">
-                            Understand the key differences between fixed-rate and adjustable-rate mortgages. We break down the pros and cons of each to help you make an informed decision for your financial situation.
-                        </p>
-                        <a href="fixed-vs-adjustable.html" class="blog-card-link">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <script>
+    // Filter chips logic: show/hide by category
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.blog-card');
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Mortgage Calculator. All rights reserved.</p>
-        </div>
-    </footer>
+    chips.forEach(chip => chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const cat = chip.dataset.cat;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = match ? '' : 'none';
+      });
+    }));
+  </script>
 </body>
 </html>
