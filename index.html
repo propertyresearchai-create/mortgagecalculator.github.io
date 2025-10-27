@@ -7,37 +7,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <nav class="top-navigation">
-            <div class="nav-content">
-                <div class="nav-logo">
-                    <h2>Property Calculator Hub</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active">🏠 Home</a></li>
-                    <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
-                    <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
-                    <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
-                    <li><a href="blog.html" class="nav-link">📝 Blog</a></li>
-                </ul>
+    <nav class="top-navigation">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <h2>Property Calculator Hub</h2>
             </div>
-        </nav>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">🏠 Home</a></li>
+                <li><a href="mortgage.html" class="nav-link">Mortgage Calculator</a></li>
+                <li><a href="loan.html" class="nav-link">Loan Calculator</a></li>
+                <li><a href="downpayment.html" class="nav-link">Down Payment Calculator</a></li>
+                <li><a href="blog.html" class="nav-link">📝 Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
         <!-- HOME PAGE -->
         <div class="hero-section">
             <h1>Free Online Financial Calculators</h1>
             <p class="hero-description">Fast, comprehensive, and convenient calculators for all your financial needs</p>
         </div>
+        
         <div class="calculator-grid-home">
             <div class="calculator-card" onclick="window.location.href='mortgage.html'">
                 <h3>Mortgage Calculator</h3>
                 <p>Calculate monthly mortgage payments with taxes, insurance, and HOA fees</p>
                 <button class="card-button">Calculate Now</button>
             </div>
+            
             <div class="calculator-card" onclick="window.location.href='loan.html'">
                 <h3>Loan Calculator</h3>
                 <p>Calculate payments for personal loans, student loans, and more</p>
                 <button class="card-button">Calculate Now</button>
             </div>
+            
             <div class="calculator-card" onclick="window.location.href='downpayment.html'">
                 <h3>Down Payment Calculator</h3>
                 <p>Calculate down payment amount, percentage, and affordable home price</p>
