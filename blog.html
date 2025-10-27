@@ -3,173 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Mortgage Calculator</title>
+  <title>Blog - Property Calculator Hub</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Blog-specific styles using global color variables */
-    :root {
-      --bg: #ffffff;
-      --text: #34495e;
-      --muted: #7f8c8d;
-      --brand: #FFAF40;
-      --chip: #F9FBFF;
-      --chip-text: #34495e;
-    }
-    
-    body {
-      background: #F9FBFF;
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 0;
-    }
-    
-    .container {
-      width: min(1100px, 92vw);
-      margin: 0 auto;
-    }
-    
-    .hero {
-      padding: 40px 0 10px;
-    }
-    
-    .hero h1 {
-      margin: 0 0 6px;
-      font-size: 28px;
-      color: var(--text);
-    }
-    
-    .hero p {
-      margin: 0;
-      font-size: 16px;
-      color: var(--muted);
-    }
-    
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      padding: 30px 0 50px;
-    }
-    
-    .blog-card {
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    
-    .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-    
-    .blog-card h2 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      color: var(--text);
-    }
-    
-    .blog-card p {
-      margin: 0 0 12px;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-    
-    .blog-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    
-    .blog-chip {
-      background: var(--chip);
-      color: var(--chip-text);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-    
-    .back-to-home {
-      display: inline-block;
-      padding: 8px 16px;
-      margin: 16px 0 0 0;
-      background: var(--bg);
-      color: var(--text);
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    
-    .back-to-home:hover {
-      background: var(--chip);
-    }
-  </style>
 </head>
 <body>
-  <!-- Back to Home Link -->
-  <div class="container">
-    <a href="index.html" class="back-to-home">← Back to Home</a>
-  </div>
-  
-  <!-- Navigation Bar -->
   <nav class="top-navigation">
-    <div class="container">
-      <div class="nav-content">
-        <a href="index.html" class="nav-brand">Property Calculator Hub</a>
-        <div class="nav-links">
-          <a href="index.html">🏠 Home</a>
-          <a href="mortgage.html">Mortgage Calculator</a>
-          <a href="loan.html">Loan Calculator</a>
-          <a href="downpayment.html">Down Payment Calculator</a>
-          <a href="blog.html" class="active">📝 Blog</a>
-        </div>
+    <div class="nav-content">
+      <div class="nav-logo">
+        Property Calculator Hub
       </div>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">🏠 Home</a></li>
+        <li><a class="nav-link" href="mortgage.html">Mortgage Calculator</a></li>
+        <li><a class="nav-link" href="loan.html">Loan Calculator</a></li>
+        <li><a class="nav-link" href="downpayment.html">Down Payment Calculator</a></li>
+        <li><a class="nav-link active" href="blog.html">📝 Blog</a></li>
+      </ul>
     </div>
   </nav>
-  
-  <!-- Blog Hero Section -->
   <div class="container">
-    <section class="hero">
-      <h1>Mortgage & Home Buying Blog</h1>
-      <p>Expert insights and guides to help you navigate your home buying journey</p>
-    </section>
-    
-    <!-- Blog Card Grid -->
+    <div class="hero-section">
+      <h1>📝 Blog</h1>
+      <p class="hero-description">Financial tips and insights for homebuyers and borrowers</p>
+    </div>
     <div class="blog-grid">
-      <a href="buying-your-first-home.html" class="blog-card">
-        <h2>Buying Your First Home: A Complete Guide</h2>
-        <p>Everything you need to know before purchasing your first property, from budgeting to closing.</p>
-        <div class="blog-meta">
-          <span class="blog-chip">First-Time Buyers</span>
-          <span class="blog-chip">5 min read</span>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>Understanding Mortgage Interest Rates</h2>
+          <span class="blog-date">January 15, 2025</span>
         </div>
-      </a>
-      
-      <a href="fixed-vs-adjustable.html" class="blog-card">
-        <h2>Fixed vs. Adjustable Rate Mortgages</h2>
-        <p>Understanding the pros and cons of each mortgage type to make the best decision for your situation.</p>
-        <div class="blog-meta">
-          <span class="blog-chip">Mortgage Types</span>
-          <span class="blog-chip">4 min read</span>
+        <p class="blog-excerpt">Learn how mortgage interest rates work and what factors influence them. Understanding rates can help you save thousands over the life of your loan.</p>
+        <div class="blog-tags">
+          <span class="tag">Mortgage</span>
+          <span class="tag">Interest Rates</span>
         </div>
-      </a>
-      
-      <a href="top-mortgage-mistakes.html" class="blog-card">
-        <h2>Top 10 Mortgage Mistakes to Avoid</h2>
-        <p>Learn from common pitfalls that can cost you thousands during the home buying process.</p>
-        <div class="blog-meta">
-          <span class="blog-chip">Tips & Advice</span>
-          <span class="blog-chip">6 min read</span>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>How Much Should You Put Down?</h2>
+          <span class="blog-date">January 10, 2025</span>
         </div>
-      </a>
+        <p class="blog-excerpt">Deciding on a down payment amount is crucial. We explore the pros and cons of different down payment percentages and what's right for you.</p>
+        <div class="blog-tags">
+          <span class="tag">Down Payment</span>
+          <span class="tag">Homebuying</span>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>Personal Loans vs. Credit Cards</h2>
+          <span class="blog-date">January 5, 2025</span>
+        </div>
+        <p class="blog-excerpt">Compare personal loans and credit cards to determine which option is best for your financial situation and borrowing needs.</p>
+        <div class="blog-tags">
+          <span class="tag">Loans</span>
+          <span class="tag">Credit</span>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>First-Time Homebuyer Programs</h2>
+          <span class="blog-date">December 28, 2024</span>
+        </div>
+        <p class="blog-excerpt">Discover federal and state programs designed to help first-time homebuyers with down payments, closing costs, and favorable loan terms.</p>
+        <div class="blog-tags">
+          <span class="tag">Homebuying</span>
+          <span class="tag">Programs</span>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>Understanding PMI and How to Avoid It</h2>
+          <span class="blog-date">December 20, 2024</span>
+        </div>
+        <p class="blog-excerpt">Private Mortgage Insurance (PMI) can add hundreds to your monthly payment. Learn what it is, when it's required, and strategies to avoid it.</p>
+        <div class="blog-tags">
+          <span class="tag">Mortgage</span>
+          <span class="tag">PMI</span>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <h2>Refinancing Your Mortgage: When and Why</h2>
+          <span class="blog-date">December 15, 2024</span>
+        </div>
+        <p class="blog-excerpt">Refinancing can lower your interest rate and monthly payments. Find out when refinancing makes sense and how to calculate potential savings.</p>
+        <div class="blog-tags">
+          <span class="tag">Mortgage</span>
+          <span class="tag">Refinancing</span>
+        </div>
+      </article>
     </div>
   </div>
 </body>
