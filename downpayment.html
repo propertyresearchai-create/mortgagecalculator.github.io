@@ -52,7 +52,9 @@
         <a href="index.html">🏠 Home</a>
         <a href="mortgage.html">Mortgage Calculator</a>
         <a href="loan.html">Loan Calculator</a>
-        <a class="active" href="downpayment.html">Down Payment Calculator</a>
+        <a href="downpayment.html" class="active">Down Payment Calculator</a>
+        <a href="top-mortgage-mistakes.html">Top Mortgage Mistakes</a>
+        <a href="goldprice.html">Gold Price</a>
       </div>
     </div>
   </nav>
@@ -66,13 +68,13 @@
       <div class="inner">
         <h3>📝 Down Payment Details</h3>
         <form id="dpForm" onsubmit="return false;">
-          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price" /></div>
-          <div class="field"><label for="dpAmount">Down Payment Amount</label><input type="number" id="dpAmount" value="60000" aria-label="Down Payment Amount" /></div>
-          <div class="field"><label for="dpPercent">Down Payment Percentage</label><input type="number" id="dpPercent" value="20" min="0" max="100" aria-label="Down Payment Percentage" /></div>
-          <div class="field"><label for="monthlyIncome">Monthly Income (Optional)</label><input type="number" id="monthlyIncome" value="0" aria-label="Monthly Income (Optional)" /></div>
+          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price"/></div>
+          <div class="field"><label for="dpAmount">Down Payment Amount</label><input type="number" id="dpAmount" value="60000" aria-label="Down Payment Amount"/></div>
+          <div class="field"><label for="dpPercent">Down Payment Percentage</label><input type="number" id="dpPercent" value="20" min="0" max="100" aria-label="Down Payment Percentage"/></div>
+          <div class="field"><label for="monthlyIncome">Monthly Income (Optional)</label><input type="number" id="monthlyIncome" value="0" aria-label="Monthly Income (Optional)"/></div>
           <div class="actions">
-            <button type="button" class="btn" id="calcBtn">💰 Calculate</button>
-            <button type="button" class="btn secondary" id="resetBtn">🔄 Reset</button>
+            <button class="btn" id="calcBtn" type="button">💰 Calculate</button>
+            <button class="btn secondary" id="resetBtn" type="button">🔄 Reset</button>
           </div>
         </form>
       </div>
