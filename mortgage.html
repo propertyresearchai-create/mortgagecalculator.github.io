@@ -51,8 +51,11 @@
       <div class="brand"><span class="dot"></span> Property Calculator Hub</div>
       <div class="menu">
         <a href="index.html">🏠 Home</a>
-        <a class="active" href="mortgage.html">Mortgage Calculator</a>
+        <a href="mortgage.html" class="active">Mortgage Calculator</a>
         <a href="loan.html">Loan Calculator</a>
+        <a href="downpayment.html">Down Payment Calculator</a>
+        <a href="top-mortgage-mistakes.html">Top Mortgage Mistakes</a>
+        <a href="goldprice.html">Gold Price</a>
       </div>
     </div>
   </nav>
@@ -66,17 +69,17 @@
       <div class="inner">
         <h3>📝 Loan Details</h3>
         <form id="mortgageForm" onsubmit="return false;">
-          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price"> </div>
-          <div class="field"><label for="downPayment">Down Payment</label><input type="number" id="downPayment" value="60000" aria-label="Down Payment"> </div>
-          <div class="field"><label for="termYears">Loan Term (Years)</label><input type="number" id="termYears" min="1" max="50" value="30" aria-label="Loan Term (Years)"> </div>
-          <div class="field"><label for="rate">Interest Rate (%)</label><input type="number" id="rate" step="0.01" value="6.5" aria-label="Interest Rate"> </div>
-          <div class="field"><label for="taxAnnual">Property Tax (Annual)</label><input type="number" id="taxAnnual" value="3600" aria-label="Property Tax (Annual)"> </div>
-          <div class="field"><label for="insAnnual">Home Insurance (Annual)</label><input type="number" id="insAnnual" value="1200" aria-label="Home Insurance (Annual)"> </div>
-          <div class="field"><label for="pmiMonthly">PMI (Monthly)</label><input type="number" id="pmiMonthly" value="0" aria-label="PMI (Monthly)"> </div>
-          <div class="field"><label for="hoaMonthly">HOA (Monthly)</label><input type="number" id="hoaMonthly" value="0" aria-label="HOA (Monthly)"> </div>
+          <div class="field"><label for="homePrice">Home Price</label><input type="number" id="homePrice" value="300000" aria-label="Home Price" /> </div>
+          <div class="field"><label for="downPayment">Down Payment</label><input type="number" id="downPayment" value="60000" aria-label="Down Payment" /> </div>
+          <div class="field"><label for="termYears">Loan Term (Years)</label><input type="number" id="termYears" value="30" min="1" max="50" aria-label="Loan Term (Years)" /> </div>
+          <div class="field"><label for="rate">Interest Rate (%)</label><input type="number" id="rate" value="6.5" step="0.01" aria-label="Interest Rate" /> </div>
+          <div class="field"><label for="taxAnnual">Property Tax (Annual)</label><input type="number" id="taxAnnual" value="3600" aria-label="Property Tax (Annual)" /> </div>
+          <div class="field"><label for="insAnnual">Home Insurance (Annual)</label><input type="number" id="insAnnual" value="1200" aria-label="Home Insurance (Annual)" /> </div>
+          <div class="field"><label for="pmiMonthly">PMI (Monthly)</label><input type="number" id="pmiMonthly" value="0" aria-label="PMI (Monthly)" /> </div>
+          <div class="field"><label for="hoaMonthly">HOA (Monthly)</label><input type="number" id="hoaMonthly" value="0" aria-label="HOA (Monthly)" /> </div>
           <div class="actions">
-            <button type="button" class="btn" id="calcBtn">💰 Calculate</button>
-            <button type="button" class="btn secondary" id="resetBtn">🔄 Reset</button>
+            <button class="btn" id="calcBtn" type="button">💰 Calculate</button>
+            <button class="btn secondary" id="resetBtn" type="button">🔄 Reset</button>
           </div>
         </form>
       </div>
