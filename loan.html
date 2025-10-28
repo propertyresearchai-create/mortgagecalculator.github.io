@@ -9,9 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root{
---bg:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--card:#ffffff;--brand:#2563eb;--brand-700:#1d4ed8;--accent:#f59e0b;--chip:#f3f4f6
-}
+    :root{--bg:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--card:#ffffff;--brand:#2563eb;--brand-700:#1d4ed8;--accent:#f59e0b;--chip:#f3f4f6}
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
     a{color:var(--brand);text-decoration:none}
@@ -60,6 +58,8 @@
         <a href="mortgage.html">Mortgage Calculator</a>
         <a href="loan.html" class="active">Loan Calculator</a>
         <a href="downpayment.html">Down Payment Calculator</a>
+        <a href="top-mortgage-mistakes.html">Top Mortgage Mistakes</a>
+        <a href="goldprice.html">Gold Price</a>
       </div>
     </div>
   </nav>
@@ -75,15 +75,15 @@
         <form id="loanForm">
           <div class="field">
             <label class="label">Loan Amount</label>
-            <input type="number" id="loanAmount" value="10000" min="1" />
+            <input type="number" id="loanAmount" value="10000" min="1">
           </div>
           <div class="field">
             <label class="label">Interest Rate (%)</label>
-            <input type="number" id="rate" value="5" step="0.01" min="0" />
+            <input type="number" id="rate" value="5" min="0" step="0.01">
           </div>
           <div class="field">
             <label class="label">Term (years)</label>
-            <input type="number" id="years" value="5" min="1" max="30" />
+            <input type="number" id="years" value="5" min="1" max="30">
           </div>
           <div class="btnrow">
             <button type="submit">Calculate</button>
@@ -94,11 +94,11 @@
     <div class="panel">
       <div class="inner">
         <h3>Loan Results</h3>
-        <div class="output" id="output">
+        <div id="output" class="output">
           <p style="color:var(--muted);font-size:14px;">Enter your loan details and click Calculate.</p>
         </div>
         <div id="chartContainer" style="display:none;">
-          <h3>Loan Payment Breakdown</h3>
+          <h4>Loan Payment Breakdown</h4>
           <canvas id="loanChart"></canvas>
         </div>
       </div>
